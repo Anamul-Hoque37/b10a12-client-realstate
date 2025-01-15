@@ -8,7 +8,7 @@ import { AuthContext } from '../../Authentication/AuthProvider';
 
 import img from '../../assets/skyscrapper.png';
 
-const Navbar = () => {
+const AgentNavbar = () => {
     const { user, logOut } = useContext(AuthContext);
     const userEmail = user?.email;
 
@@ -25,10 +25,11 @@ const Navbar = () => {
 
     const Links = <>
         <li><NavLink to="/" >Home</NavLink></li>
-        <li><NavLink to='/all-properties'>All Properties</NavLink></li>
-        <li><NavLink to='/user'>User Dashboard</NavLink></li>
-        <li><NavLink to='/agent'>Agent Dashboard</NavLink></li>
-        <li><NavLink to='/admin'>Admin Dashboard</NavLink></li>
+        <li><NavLink to='/agent'>Agent Profile</NavLink></li>
+        <li><NavLink to='/agent/add-property'>Add Property</NavLink></li>
+        <li><NavLink to='/agent/added-property'>My Added Properties</NavLink></li>
+        <li><NavLink to='/agent/sold-property'>My Sold Properties</NavLink></li>
+        <li><NavLink to='/agent/offer'>Offered Properties</NavLink></li>
         {/* {
             user && <> <li><NavLink to='/add'>Add Tutorial</NavLink></li> </>
         } */}
@@ -111,4 +112,4 @@ const Navbar = () => {
     );
 };
 
-export default Navbar;
+export default AgentNavbar;
