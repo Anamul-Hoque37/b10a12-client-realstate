@@ -6,6 +6,7 @@ import auth from '../../firebase.config';
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { AuthContext } from './AuthProvider';
 import Swal from 'sweetalert2';
+import { FcGoogle } from "react-icons/fc";
 
 const Registration = () => {
     const { createNewUser, setUser } = useContext(AuthContext);
@@ -124,7 +125,7 @@ const Registration = () => {
                         <input name="password" type={showPassword ? 'text' : 'password'} placeholder="password" className="input input-bordered" required />
                         <button onClick={() => setShowPassword(!showPassword)} className='btn btn-xs absolute right-4 top-12'>
                             {
-                                showPassword ? <FaEyeSlash /> : <FaEye />
+                                showPassword ? <FaEyeSlash className='text-2xl'/> : <FaEye className='text-2xl'/>
                             }
                         </button>
                         {
@@ -136,12 +137,12 @@ const Registration = () => {
                         }
                     </div>
                     <div className="form-control mt-6">
-                        <button className="btn btn-primary bg-gradient-to-l from-teal-400 via-indigo-500 to-purple-700">Sign In</button>
+                        <button className="btn btn-primary text-xl font-semibold bg-gradient-to-l from-slate-700 via-fuchsia-700 to-slate-700">Registration Now</button>
                     </div>
-                    <p>Have an account ? <Link className="text-red-600 font-bold" to="/login">Login</Link> </p>
+                    <p className='text-lg font-bold'>Have an account ? <Link className="text-emerald-600 font-bold" to="/login">Login</Link> </p>
                 </form>
                 <div className='w-full p-8 mx-auto'>
-                    <button onClick={handleGoogleSignIn} className='btn w-full text-black bg-emerald-400 hover:bg-emerald-700 '>Login With Google</button>
+                    <button onClick={handleGoogleSignIn} className='btn text-xl font-semibold text-white w-full bg-fuchsia-600 hover:bg-fuchsia-800'>Login With Google <FcGoogle className='text-3xl'/></button>
                 </div>
             </div>
 

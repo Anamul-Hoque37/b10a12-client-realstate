@@ -34,7 +34,7 @@ const Navbar = () => {
 
     return (
         <div className='bg-green-300 sticky top-0 z-50'>
-            <div className="navbar flex justify-between bg-gradient-to-l from-teal-400 via-indigo-500 to-purple-700 text-white">
+            <div className="navbar flex justify-between bg-gradient-to-l from-slate-700 via-fuchsia-700 to-slate-700 text-white">
                 <div className="flex">
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
