@@ -45,7 +45,7 @@ const Login = () => {
     const handleGoogleSignIn = () =>{
         signInWithPopup(auth, provider)
         .then((result) =>{
-            navigate("/")
+            navigate(location?.state ? location.state : "/")
             Swal.fire({
                 title: 'success',
                 text: 'Successfully login',

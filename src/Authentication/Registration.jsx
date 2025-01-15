@@ -7,13 +7,15 @@ import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { AuthContext } from './AuthProvider';
 import Swal from 'sweetalert2';
 import { FcGoogle } from "react-icons/fc";
+import useAxiosPublic from '../Hooks/useAxiosPublic';
 
 const Registration = () => {
-    const { createNewUser, setUser } = useContext(AuthContext);
+    const { createNewUser, setUser, updateUserProfile } = useContext(AuthContext);
     const [showPassword, setShowPassword] = useState(false);
     const provider = new GoogleAuthProvider()
     const [error, setError] = useState('');
     const navigate = useNavigate();
+    const axiosPublic = useAxiosPublic()
     const handleSubmit = (e) => {
         e.preventDefault();
         const form = e.target;
@@ -57,12 +59,28 @@ const Registration = () => {
             .then(result => {
                 const user = result.user;
                 setUser(user)
-                navigate("/")
-                Swal.fire({
-                    title: 'success',
-                    text: 'Successfully login',
-                    icon: 'success',
-                });
+                updateUserProfile(name, photo)
+                .then(()=>{
+                    // create User entry in Database
+                    const userInfo = {
+                        name: name,
+                        email: email,
+                        image: photo,
+                    }
+                    axiosPublic.post('/users', userInfo)
+                    .then(res =>{
+                        if(res.data.insertedId){
+                            navigate("/")
+                            Swal.fire({
+                                title: 'success',
+                                text: 'Successfully login',
+                                icon: 'success',
+                            }); 
+                        }
+                    })
+                }).catch(err =>{
+                })
+               
             })
             .catch((error) => {
                 const errorCode = error.code;
