@@ -30,6 +30,7 @@ import AdminProfile from './Components/AdminDashboard/AdminProfile';
 import ManageProperties from './Components/AdminDashboard/ManageProperties';
 import ManageReviews from './Components/AdminDashboard/ManageReviews';
 import ManageUsers from './Components/AdminDashboard/ManageUsers';
+import PrivateRoute from './Router/PrivateRoute';
 
 const router = createBrowserRouter([
   {
@@ -43,7 +44,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'all-properties',
-        element: <AllProperties></AllProperties>,
+        element: <PrivateRoute><AllProperties></AllProperties></PrivateRoute>,
       },
       {
         path: 'dashboard',
