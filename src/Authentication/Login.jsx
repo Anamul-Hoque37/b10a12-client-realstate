@@ -6,7 +6,7 @@ import auth from '../../firebase.config'
 import { AuthContext } from './AuthProvider';
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import Swal from 'sweetalert2';
-import { FcGoogle } from "react-icons/fc";
+import SocialLogin from './SocialLogin';
 
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -42,25 +42,25 @@ const Login = () => {
         })
     };
 
-    const handleGoogleSignIn = () =>{
-        signInWithPopup(auth, provider)
-        .then((result) =>{
-            navigate(location?.state ? location.state : "/")
-            Swal.fire({
-                title: 'success',
-                text: 'Successfully login',
-                icon: 'success',
-            });
-        })
-        .catch(error =>{
-            Swal.fire({
-                title: 'Error',
-                text: 'Cannot Login', error,
-                icon: 'error',
-                footer: 'Please check your Google account.'
-            });
-        })
-    }
+    // const handleGoogleSignIn = () =>{
+    //     signInWithPopup(auth, provider)
+    //     .then((result) =>{
+    //         navigate(location?.state ? location.state : "/")
+    //         Swal.fire({
+    //             title: 'success',
+    //             text: 'Successfully login',
+    //             icon: 'success',
+    //         });
+    //     })
+    //     .catch(error =>{
+    //         Swal.fire({
+    //             title: 'Error',
+    //             text: 'Cannot Login', error,
+    //             icon: 'error',
+    //             footer: 'Please check your Google account.'
+    //         });
+    //     })
+    // }
 
     return (
         <div className='p-6'>
@@ -95,7 +95,7 @@ const Login = () => {
                     <p className='text-lg font-bold'>Don't have an account ? <Link className="text-red-600 font-bold" to="/registration">Registration</Link> </p>
                 </form>
                 <div className='p-8 w-full mx-auto'>
-                    <button onClick={handleGoogleSignIn} className='btn text-xl font-semibold text-white w-full bg-fuchsia-600 hover:bg-fuchsia-800'>Login With Google <FcGoogle className='text-3xl font-bold'/></button>
+                    <SocialLogin></SocialLogin>
                 </div>
             </div>
         </div>

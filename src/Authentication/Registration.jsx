@@ -6,8 +6,8 @@ import auth from '../../firebase.config';
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { AuthContext } from './AuthProvider';
 import Swal from 'sweetalert2';
-import { FcGoogle } from "react-icons/fc";
 import useAxiosPublic from '../Hooks/useAxiosPublic';
+import SocialLogin from './SocialLogin';
 
 const Registration = () => {
     const { createNewUser, setUser, updateUserProfile } = useContext(AuthContext);
@@ -94,25 +94,25 @@ const Registration = () => {
             });
     };
 
-    const handleGoogleSignIn = () => {
-        signInWithPopup(auth, provider)
-            .then((result) => {
-                navigate("/")
-                Swal.fire({
-                    title: 'success',
-                    text: 'Successfully login',
-                    icon: 'success',
-                });
-            })
-            .catch(error => {
-                Swal.fire({
-                    title: 'Error',
-                    text: 'Cannot Login', error,
-                    icon: 'error',
-                    footer: 'Please check your internet connection and try again.'
-                });
-            })
-    }
+    // const handleGoogleSignIn = () => {
+    //     signInWithPopup(auth, provider)
+    //         .then((result) => {
+    //             navigate("/")
+    //             Swal.fire({
+    //                 title: 'success',
+    //                 text: 'Successfully login',
+    //                 icon: 'success',
+    //             });
+    //         })
+    //         .catch(error => {
+    //             Swal.fire({
+    //                 title: 'Error',
+    //                 text: 'Cannot Login', error,
+    //                 icon: 'error',
+    //                 footer: 'Please check your internet connection and try again.'
+    //             });
+    //         })
+    // }
 
     return (
         <div className='p-6'>
@@ -160,7 +160,7 @@ const Registration = () => {
                     <p className='text-lg font-bold'>Have an account ? <Link className="text-emerald-600 font-bold" to="/login">Login</Link> </p>
                 </form>
                 <div className='w-full p-8 mx-auto'>
-                    <button onClick={handleGoogleSignIn} className='btn text-xl font-semibold text-white w-full bg-fuchsia-600 hover:bg-fuchsia-800'>Login With Google <FcGoogle className='text-3xl'/></button>
+                    <SocialLogin></SocialLogin>
                 </div>
             </div>
 
