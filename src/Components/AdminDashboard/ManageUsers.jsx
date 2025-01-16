@@ -30,6 +30,22 @@ const ManageUsers = () => {
             }
         })
     }
+    const handleMakeAgent = data =>{
+        axiosSecure.patch(`/users/agent/${data._id}`)
+        .then(res =>{
+            console.log(res.data)
+            if(res.data.modifiedCount > 0){
+                refetch()
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: `${data.name} is an Agent Now!`,
+                    showConfirmButton: false,
+                    timer: 2000
+                  });
+            }
+        })
+    }
     const handleDelete = id => {
         Swal.fire({
             title: "Are you sure?",
@@ -78,9 +94,11 @@ const ManageUsers = () => {
                             <td className="border border-gray-200 px-4">{data.name}</td>
                             <td className="border border-gray-200 px-4">{data.email}</td>
                             <td className="border border-gray-200 ">
-                                { data.role === 'admin' ? <button className='btn btn-primary w-full bg-purple-600 text-center h-full text-white'>Admin</button> : <button onClick={() => handleMakeAdmin(data)}  className="btn btn-primary w-full bg-fuchsia-700 hover:bg-fuchsia-900  text-white">Make Admin</button>}
+                                { data.role === 'admin' ? <button className='btn btn-primary w-full bg-green-600 text-center h-full text-white'>Admin</button> : <button onClick={() => handleMakeAdmin(data)}  className="btn btn-primary w-full bg-fuchsia-700 hover:bg-fuchsia-900  text-white">Make Admin</button>}
                                 </td>
-                            <td className="border border-gray-200 "><Link to={`/update/${data._id}`}><button className="btn btn-primary w-full bg-fuchsia-700 hover:bg-fuchsia-900  text-white">Make Agent</button></Link></td>
+                            <td className="border border-gray-200 ">
+                                {data.role === 'agent' ? <button className='btn btn-primary w-full bg-lime-500 text-center h-full text-white'>Agent</button> : <button onClick={() => handleMakeAgent(data)} className="btn btn-primary w-full bg-fuchsia-700 hover:bg-fuchsia-900  text-white">Make Agent</button>}
+                                </td>
                             <td className="border border-gray-200"><button onClick={() => handleDelete(data._id)} className="btn btn-primary w-full bg-fuchsia-700 hover:bg-fuchsia-900 text-white">Delete</button></td>
                         </tr>
                     ))}

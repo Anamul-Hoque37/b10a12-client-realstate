@@ -66,7 +66,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/user",
-    element: <User></User>,
+    element: <PrivateRoute><User></User></PrivateRoute>,
     errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
