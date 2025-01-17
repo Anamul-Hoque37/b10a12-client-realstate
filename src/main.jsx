@@ -36,6 +36,7 @@ import ManageReviews from './Components/AdminDashboard/ManageReviews';
 import ManageUsers from './Components/AdminDashboard/ManageUsers';
 import PrivateRoute from './Router/PrivateRoute';
 import UpdateProperty from './Components/AgentDashboard/UpdateProperty';
+import ViewDetails from './Components/HomePage/ViewDetails';
 
 const router = createBrowserRouter([
   {
@@ -50,6 +51,11 @@ const router = createBrowserRouter([
       {
         path: 'all-properties',
         element: <PrivateRoute><AllProperties></AllProperties></PrivateRoute>,
+      },
+      {
+        path: 'view-details/:id',
+        element:<PrivateRoute><ViewDetails></ViewDetails></PrivateRoute>,
+        loader: ({params}) => fetch(`http://localhost:5000/view-details/property/${params.id}`)
       },
       {
         path: 'dashboard',

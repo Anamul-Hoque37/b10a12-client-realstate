@@ -2,6 +2,7 @@ import React from 'react';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import User from '../../Shared/User';
+import { Link } from 'react-router-dom';
 
 const AllProperties = () => {
     const data = User();
@@ -44,12 +45,11 @@ const AllProperties = () => {
                                         <img className='h-full w-full' src={data.image} alt={data.name} />
                                     </div>
                                 </div>
-                                {/* <div className="card-actions justify-end">
-                                    <Link to={`/agent/update/${property._id}`}>
-                                    <button className="btn btn-primary bg-fuchsia-700 hover:bg-fuchsia-900">Update</button>
+                                <div className="card-actions justify-end">
+                                    <Link to={`/view-details/${property._id}`}>
+                                    <button className="btn btn-primary bg-fuchsia-700 hover:bg-fuchsia-900">View Details</button>
                                     </Link> 
-                                    <button onClick={() => handleDelete(property._id)} className="btn btn-primary bg-fuchsia-700 hover:bg-fuchsia-900">Deleted</button>
-                                </div> */}
+                                </div>
                             </div>
                         </div>
                     ))
