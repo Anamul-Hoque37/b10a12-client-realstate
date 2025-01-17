@@ -1,9 +1,60 @@
 import React from 'react';
+import useAxiosSecure from '../../Hooks/useAxiosSecure';
+import { useQuery } from '@tanstack/react-query';
+import User from '../../Shared/User';
 
 const AllProperties = () => {
+    const data = User();
+    const axiosSecure = useAxiosSecure();
+    const verifyStatus = 'verify';
+    const { data: properties = [] } = useQuery({
+        queryKey: ['verifyStatus'],
+        queryFn: async() => {
+            const res = await axiosSecure.get(`/property/${verifyStatus}`);
+            return res.data;
+        }
+    })
     return (
-        <div>
-            <h1>This is All Properties section</h1>
+        <div className='min-h-screen p-4'>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
+                {
+                    properties.map((property) => (
+                        <div key={property._id} className="card bg-base-100 shadow-xl">
+                            <figure className='w-full h-1/2'>
+                                <img
+                                    className='h-full w-full'
+                                    src={property.image}
+                                    alt="Shoes" />
+                            </figure>
+                            <div className="card-body bg-white h-1/2">
+                                <h2 className="card-title">
+                                    Verification!
+                                    <div className="badge badge-secondary bg-purple-500 p-3">
+                                        {property?.verifyStatus === 'verify' ? "verified" : property?.verifyStatus === 'reject' ? "rejected" : "pending"}
+                                    </div>
+                                </h2>
+                                <div className='flex justify-between items-start'>
+                                    <div className='flex flex-col gap-0'>
+                                        <p>{property.title}</p>
+                                        <p>{property.location}</p>
+                                        <p>{property.name}</p>
+                                        <p>{property?.priceMin} _ {property?.priceMax}</p>
+                                    </div>
+                                    <div className='w-16 h-16 border'>
+                                        <img className='h-full w-full' src={data.image} alt={data.name} />
+                                    </div>
+                                </div>
+                                {/* <div className="card-actions justify-end">
+                                    <Link to={`/agent/update/${property._id}`}>
+                                    <button className="btn btn-primary bg-fuchsia-700 hover:bg-fuchsia-900">Update</button>
+                                    </Link> 
+                                    <button onClick={() => handleDelete(property._id)} className="btn btn-primary bg-fuchsia-700 hover:bg-fuchsia-900">Deleted</button>
+                                </div> */}
+                            </div>
+                        </div>
+                    ))
+                }
+            </div>
         </div>
     );
 };

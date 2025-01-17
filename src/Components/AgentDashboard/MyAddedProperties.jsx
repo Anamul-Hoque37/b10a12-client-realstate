@@ -57,7 +57,7 @@ const MyAddedProperties = () => {
                                 <h2 className="card-title">
                                     Verification!
                                     <div className="badge badge-secondary bg-purple-500 p-3">
-                                        {property?.verification === 'verify' ? "verified" : property?.verification === 'reject' ? "rejected" : "pending"}
+                                        {property?.verifyStatus === 'verify' ? "verified" : property?.verifyStatus === 'reject' ? "rejected" : "pending"}
                                     </div>
                                 </h2>
                                 <div className='flex justify-between items-start'>
