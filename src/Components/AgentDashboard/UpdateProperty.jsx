@@ -1,18 +1,17 @@
-import React from 'react';
-import User from '../../Shared/User';
-import { useForm } from "react-hook-form";
+import { useLoaderData } from "react-router-dom";
 import Swal from "sweetalert2";
-import useAxiosSecure from '../../Hooks/useAxiosSecure';
-import useAxiosPublic from '../../Hooks/useAxiosPublic';
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import { useForm } from "react-hook-form";
+
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
-const AddProperty = () => {
-    const data = User()
-    console.log(data)
+const UpdateProperty = () => {
+    const {name, title, image, priceMin, priceMax, location, email, _id} = useLoaderData();
 
-    const { register, handleSubmit, reset } = useForm();
+    const { register, handleSubmit } = useForm();
     const axiosPublic = useAxiosPublic();
     const axiosSecure = useAxiosSecure();
     const onSubmit = async (data) => {
@@ -36,26 +35,24 @@ const AddProperty = () => {
                 image: res.data.data.display_url
             }
             // 
-            const menuRes = await axiosSecure.post('/property', menuItem);
+            const menuRes = await axiosSecure.patch(`/property/${_id}`, menuItem);
             console.log(menuRes.data)
-            if (menuRes.data.insertedId) {
+            if(menuRes.data.modifiedCount > 0){
                 // show success popup
-                reset();
                 Swal.fire({
                     position: "top-end",
                     icon: "success",
-                    title: `${data.name} is added to the menu.`,
+                    title: `${data.name} is updated to the menu.`,
                     showConfirmButton: false,
                     timer: 1500
-                });
+                  });
             }
         }
-        console.log('with image url', res.data);
+        console.log( 'with image url', res.data);
     };
-
     return (
         <div>
-            <div className="hero p-8 bg-base-200 min-h-screen">
+             <div className="hero p-8 bg-base-200 min-h-screen">
                 <div className="hero-content bg-white rounded-md w-[400px] sm:w-[500px] md:w-[600px] lg:w-[700px] flex-col">
                     <div className="card bg-white w-full shrink-0 shadow-2xl">
                         <form onSubmit={handleSubmit(onSubmit)} className="card-body">
@@ -66,6 +63,7 @@ const AddProperty = () => {
                                     </label>
                                     <input
                                         type="text"
+                                        defaultValue={title}
                                         placeholder="Property Title"
                                         {...register('title', { required: true })}
                                         required
@@ -77,6 +75,7 @@ const AddProperty = () => {
                                     </label>
                                     <input
                                         type="text"
+                                        defaultValue={location}
                                         placeholder="Property Location"
                                         {...register('location', { required: true })}
                                         required
@@ -91,7 +90,7 @@ const AddProperty = () => {
                                         placeholder="Property Location"
                                         {...register('name', { required: true })}
                                         required
-                                        className="input input-bordered w-full" defaultValue={data.name} readOnly />
+                                        className="input input-bordered w-full" defaultValue={name} readOnly />
                                 </div>
                                 <div className="form-control">
                                     <label className="label">
@@ -102,7 +101,7 @@ const AddProperty = () => {
                                         placeholder="Property Location"
                                         {...register('email', { required: true })}
                                         required
-                                        className="input input-bordered w-full" defaultValue={data.email} readOnly/>
+                                        className="input input-bordered w-full" defaultValue={email} readOnly/>
                                 </div>
                                 <div className="form-control">
                                     <label className="label">
@@ -110,6 +109,7 @@ const AddProperty = () => {
                                     </label>
                                     <input
                                         type="number"
+                                        defaultValue={priceMin}
                                         placeholder="Price"
                                         {...register('priceMin', { required: true })}
                                         className="input input-bordered w-full" />
@@ -120,6 +120,7 @@ const AddProperty = () => {
                                     </label>
                                     <input
                                         type="number"
+                                        defaultValue={priceMax}
                                         placeholder="Price"
                                         {...register('priceMax', { required: true })}
                                         className="input input-bordered w-full" />
@@ -132,15 +133,14 @@ const AddProperty = () => {
                                 </div>
                             </div>
                             <div className="form-control mt-6">
-                                <button className="btn btn-primary bg-fuchsia-700 hover:bg-fuchsia-900">Add a property</button>
+                                <button className="btn btn-primary bg-fuchsia-700 hover:bg-fuchsia-900">Submit</button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
-
         </div>
     );
 };
 
-export default AddProperty;
+export default UpdateProperty;

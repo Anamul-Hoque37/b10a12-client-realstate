@@ -35,6 +35,7 @@ import ManageProperties from './Components/AdminDashboard/ManageProperties';
 import ManageReviews from './Components/AdminDashboard/ManageReviews';
 import ManageUsers from './Components/AdminDashboard/ManageUsers';
 import PrivateRoute from './Router/PrivateRoute';
+import UpdateProperty from './Components/AgentDashboard/UpdateProperty';
 
 const router = createBrowserRouter([
   {
@@ -111,6 +112,11 @@ const router = createBrowserRouter([
       {
         path: '/agent/offer',
         element: <OfferedProperties></OfferedProperties>,
+      },
+      {
+        path: '/agent/update/:id',
+        element: <UpdateProperty></UpdateProperty>,
+        loader: ({params}) => fetch(`http://localhost:5000/update/property/${params.id}`)
       },
     ]
   },
