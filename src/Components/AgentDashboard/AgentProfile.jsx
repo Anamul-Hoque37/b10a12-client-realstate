@@ -3,7 +3,6 @@ import User from '../../Shared/User';
 
 const AgentProfile = () => {
     const data = User()
-    console.log(data);
     return (
         <div className='p-8 flex items-center justify-center'>
             <div className="card bg-white w-96 shadow-xl">
@@ -15,7 +14,8 @@ const AgentProfile = () => {
                 </figure>
                 <div className="card-body items-center text-center">
                     <h2 className="card-title">{data.name}</h2>
-                    <p>{data.role}</p>
+                    <p className='font-bold'>{data.email}</p>
+                    <p className='text-xl font-bold'>{data.role}</p>
                 </div>
             </div>
         </div>
