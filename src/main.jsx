@@ -37,6 +37,7 @@ import ManageUsers from './Components/AdminDashboard/ManageUsers';
 import PrivateRoute from './Router/PrivateRoute';
 import UpdateProperty from './Components/AgentDashboard/UpdateProperty';
 import ViewDetails from './Components/HomePage/ViewDetails';
+import MakeOffer from './Components/HomePage/MakeOffer';
 
 const router = createBrowserRouter([
   {
@@ -56,6 +57,11 @@ const router = createBrowserRouter([
         path: 'view-details/:id',
         element:<PrivateRoute><ViewDetails></ViewDetails></PrivateRoute>,
         loader: ({params}) => fetch(`http://localhost:5000/view-details/property/${params.id}`)
+      },
+      {
+        path: 'make-offer/:id',
+        element: <PrivateRoute><MakeOffer></MakeOffer></PrivateRoute>,
+        loader: ({params}) => fetch(`http://localhost:5000/make-offer/wishlist/${params.id}`)
       },
       {
         path: 'dashboard',

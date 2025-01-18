@@ -46,7 +46,7 @@ const Wishlist = () => {
                                     </div>
                                 </div>
                                 <div className="card-actions justify-end">
-                                    <Link to={`/view-details/${property._id}`}>
+                                    <Link to={`/make-offer/${property._id}`}>
                                         <button className="btn btn-primary bg-fuchsia-700 hover:bg-fuchsia-900">Make an offer</button>
                                     </Link>
                                 </div>

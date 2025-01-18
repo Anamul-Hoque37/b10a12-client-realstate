@@ -1,58 +1,46 @@
-import { useLoaderData } from "react-router-dom";
-import Swal from "sweetalert2";
-import useAxiosSecure from "../../Hooks/useAxiosSecure";
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
-import { useForm } from "react-hook-form";
+import React from 'react';
+import User from '../../Shared/User';
+import { useLoaderData } from 'react-router-dom';
+import useAxiosSecure from '../../Hooks/useAxiosSecure';
+import { useForm } from 'react-hook-form';
+import Swal from 'sweetalert2';
 
-
-const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
-const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
-
-const UpdateProperty = () => {
-    const {name, title, priceMin, priceMax, location, email, _id} = useLoaderData();
-
+const MakeOffer = () => {
+    const data = User();
+    const { name, title, image, location, _id } = useLoaderData();
     const { register, handleSubmit } = useForm();
-    const axiosPublic = useAxiosPublic();
     const axiosSecure = useAxiosSecure();
     const onSubmit = async (data) => {
         console.log(data)
-        // image upload to imgbb and then get an url
-        const imageFile = { image: data.image[0] }
-        const res = await axiosPublic.post(image_hosting_api, imageFile, {
-            headers: {
-                'content-type': 'multipart/form-data'
-            }
-        });
-        if (res.data.success) {
-            // now send the menu item data to the server with the image url
-            const menuItem = {
-                title: data.title,
-                location: data.location,
-                name: data.name,
-                email: data.email,
-                priceMin: parseFloat(data.priceMin),
-                priceMax: parseFloat(data.priceMax),
-                image: res.data.data.display_url
-            }
-            // 
-            const menuRes = await axiosSecure.patch(`/property/${_id}`, menuItem);
-            console.log(menuRes.data)
-            if(menuRes.data.modifiedCount > 0){
-                // show success popup
-                Swal.fire({
-                    position: "top-end",
-                    icon: "success",
-                    title: `${data.name} is updated to the menu.`,
-                    showConfirmButton: false,
-                    timer: 1500
-                  });
-            }
+        // now send the menu item data to the server with the image url
+        const makeOffer = {
+            title: data.title,
+            location: data.location,
+            name: data.name,
+            image: image,
+            buyerName: data.buyerName,
+            buyerEmail: data.buyerEmail,
+            offerPrice: data.offerPrice,
+            date: data.date,
+            id: _id
         }
-        console.log( 'with image url', res.data);
+        // 
+        const offerData = await axiosSecure.post('/bought', makeOffer);
+        console.log(offerData.data)
+        if (offerData.data.modifiedCount > 0) {
+            // show success popup
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: `${data.name} is Offered the Property.`,
+                showConfirmButton: false,
+                timer: 1500
+            });
+        }
     };
     return (
         <div>
-             <div className="hero p-8 bg-base-200 min-h-screen">
+            <div className="hero p-8 bg-base-200 min-h-screen">
                 <div className="hero-content bg-white rounded-md w-[400px] sm:w-[500px] md:w-[600px] lg:w-[700px] flex-col">
                     <div className="card bg-white w-full shrink-0 shadow-2xl">
                         <form onSubmit={handleSubmit(onSubmit)} className="card-body">
@@ -67,7 +55,7 @@ const UpdateProperty = () => {
                                         placeholder="Property Title"
                                         {...register('title', { required: true })}
                                         required
-                                        className="input input-bordered w-full" />
+                                        className="input input-bordered w-full" readOnly/>
                                 </div>
                                 <div className="form-control">
                                     <label className="label">
@@ -79,7 +67,7 @@ const UpdateProperty = () => {
                                         placeholder="Property Location"
                                         {...register('location', { required: true })}
                                         required
-                                        className="input input-bordered w-full" />
+                                        className="input input-bordered w-full" readOnly/>
                                 </div>
                                 <div className="form-control">
                                     <label className="label">
@@ -87,53 +75,56 @@ const UpdateProperty = () => {
                                     </label>
                                     <input
                                         type="text"
-                                        placeholder="Property Location"
+                                        placeholder="Agent Name"
                                         {...register('name', { required: true })}
                                         required
                                         className="input input-bordered w-full" defaultValue={name} readOnly />
                                 </div>
                                 <div className="form-control">
                                     <label className="label">
-                                        <span className="label-text">Agent Email</span>
+                                        <span className="label-text">Buyer Name</span>
+                                    </label>
+                                    <input
+                                        type="text"
+                                        placeholder="Buyer Name"
+                                        {...register('buyerName', { required: true })}
+                                        required
+                                        className="input input-bordered w-full" defaultValue={data.name} readOnly />
+                                </div>
+                                <div className="form-control">
+                                    <label className="label">
+                                        <span className="label-text">Buyer Email</span>
                                     </label>
                                     <input
                                         type="text"
                                         placeholder="Property Location"
-                                        {...register('email', { required: true })}
+                                        {...register('buyerEmail', { required: true })}
                                         required
-                                        className="input input-bordered w-full" defaultValue={email} readOnly/>
+                                        className="input input-bordered w-full" defaultValue={data.email} readOnly />
                                 </div>
                                 <div className="form-control">
                                     <label className="label">
-                                        <span className="label-text">Price min</span>
+                                        <span className="label-text">Offer Price</span>
                                     </label>
                                     <input
                                         type="number"
-                                        defaultValue={priceMin}
-                                        placeholder="Price"
-                                        {...register('priceMin', { required: true })}
+                                        placeholder="Offer Price"
+                                        {...register('offerPrice', { required: true })}
                                         className="input input-bordered w-full" />
                                 </div>
                                 <div className="form-control">
                                     <label className="label">
-                                        <span className="label-text">Price max</span>
+                                        <span className="label-text">Buying Date</span>
                                     </label>
                                     <input
-                                        type="number"
-                                        defaultValue={priceMax}
-                                        placeholder="Price"
-                                        {...register('priceMax', { required: true })}
+                                        type="date"
+                                        placeholder="Date"
+                                        {...register('date', { required: true })}
                                         className="input input-bordered w-full" />
-                                </div>
-                                <div className="form-control">
-                                    <label className="label">
-                                        <span className="label-text">Image</span>
-                                    </label>
-                                    <input {...register('image', { required: true })} type="file" className="file-input w-full border border-gray-300 max-w-full" />
                                 </div>
                             </div>
                             <div className="form-control mt-6">
-                                <button className="btn btn-primary bg-fuchsia-700 hover:bg-fuchsia-900">Submit</button>
+                                <button className="btn btn-primary bg-fuchsia-700 hover:bg-fuchsia-900">Offer Button</button>
                             </div>
                         </form>
                     </div>
@@ -143,4 +134,4 @@ const UpdateProperty = () => {
     );
 };
 
-export default UpdateProperty;
+export default MakeOffer;
