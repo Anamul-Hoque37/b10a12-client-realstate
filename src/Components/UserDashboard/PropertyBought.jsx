@@ -2,6 +2,7 @@ import React from 'react';
 import User from '../../Shared/User';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
+import { Link } from 'react-router-dom';
 
 const PropertyBought = () => {
     const data = User();
@@ -42,7 +43,7 @@ const PropertyBought = () => {
                                     </div>
                                 </div>
                                 <div className="flex justify-end">
-                                    {property?.Status === 'accept' ? <button className="btn btn-primary bg-fuchsia-700 hover:bg-fuchsia-900">Pay</button> : ""}
+                                    {property?.Status === 'accept' ? <Link to='/user/payment'><button className="btn btn-primary bg-fuchsia-700 hover:bg-fuchsia-900">Pay</button></Link> : ""}
                                 </div>
                             </div>
                         </div>

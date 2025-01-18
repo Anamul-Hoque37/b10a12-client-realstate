@@ -38,6 +38,7 @@ import PrivateRoute from './Router/PrivateRoute';
 import UpdateProperty from './Components/AgentDashboard/UpdateProperty';
 import ViewDetails from './Components/HomePage/ViewDetails';
 import MakeOffer from './Components/HomePage/MakeOffer';
+import Payment from './Components/UserDashboard/Payment';
 
 const router = createBrowserRouter([
   {
@@ -85,6 +86,10 @@ const router = createBrowserRouter([
       {
         path: '/user',
         element: <MyProfile></MyProfile>,
+      },
+      {
+        path:'/user/payment',
+        element: <Payment></Payment>,
       },
       {
         path: '/user/my-reviews',

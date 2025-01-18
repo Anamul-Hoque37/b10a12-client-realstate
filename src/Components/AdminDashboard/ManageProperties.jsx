@@ -44,6 +44,22 @@ const ManageProperties = () => {
                 }
             })
     }
+    const handleView = data => {
+        axiosSecure.patch(`/property/adds/${data._id}`)
+            .then(res => {
+                console.log(res.data)
+                if (res.data.modifiedCount > 0) {
+                    refetch()
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: `${data.name} is a Add Advertisement Section!`,
+                        showConfirmButton: false,
+                        timer: 2000
+                    });
+                }
+            })
+    }
     return (
         <div className='w-11/12 min-h-screen mx-auto py-8'>
             <div className='flex justify-between'>
@@ -61,6 +77,7 @@ const ManageProperties = () => {
                             <th className="border w-1/3 border-gray-200 px-4 py-2 text-left font-medium text-gray-700">Price Max</th>
                             <th className="border w-1/6 border-gray-200 px-4 py-2 text-left font-medium text-gray-700">Make Admin</th>
                             <th className="border w-1/6 border-gray-200 px-4 py-2 text-left font-medium text-gray-700">Make Agent</th>
+                            <th className="border w-1/6 border-gray-200 px-4 py-2 text-left font-medium text-gray-700">Adds</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -77,6 +94,9 @@ const ManageProperties = () => {
                                 </td>
                                 <td className="border border-gray-200 ">
                                     {data.verifyStatus === 'reject' ? <button className='btn btn-primary w-full bg-lime-500 text-center h-full text-white'>Rejected</button> : <button onClick={() => handleReject(data)} className="btn btn-primary w-full bg-fuchsia-700 hover:bg-fuchsia-900  text-white">Make Reject</button>}
+                                </td>
+                                <td className="border border-gray-200 ">
+                                    {data.adds === 'adds' ? <button className='btn btn-primary w-full bg-lime-500 text-center h-full text-white'>View</button> : <button onClick={() => handleView(data)} className="btn btn-primary w-full bg-fuchsia-700 hover:bg-fuchsia-900  text-white">Not View</button>}
                                 </td>
                             </tr>
                         ))}
