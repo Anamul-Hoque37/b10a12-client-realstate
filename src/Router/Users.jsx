@@ -3,7 +3,7 @@ import UserNavbar from '../Components/UserDashboard/UserNavbar';
 import { Outlet } from 'react-router-dom';
 import Footer from '../Components/HomePage/Footer';
 
-const User = () => {
+const Users = () => {
     return (
         <div>
             <UserNavbar></UserNavbar>
@@ -13,4 +13,4 @@ const User = () => {
     );
 };
 
-export default User;
+export default Users;

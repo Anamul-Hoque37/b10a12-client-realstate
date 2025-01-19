@@ -11,8 +11,8 @@ import User from '../../Shared/User';
 
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext);
-    const data = User()
-    console.log(data);
+    const currentUser = User()
+    console.log(currentUser);
     const [isDarkMode, setIsDarkMode] = useState(false);
     useEffect(() => {
         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -28,7 +28,7 @@ const Navbar = () => {
         <li><NavLink to="/" >Home</NavLink></li>
         <li><NavLink to='/all-properties'>All Properties</NavLink></li>
         {
-            data?.role === 'admin' ? <li><NavLink to='/admin'>Admin Dashboard</NavLink></li> : data?.role === 'agent' ? <li><NavLink to='/agent'>Agent Dashboard</NavLink></li> : <li><NavLink to='/user'>User Dashboard</NavLink></li>
+            currentUser?.role === 'admin' ? <li><NavLink to='/admin'>Admin Dashboard</NavLink></li> : currentUser?.role === 'agent' ? <li><NavLink to='/agent'>Agent Dashboard</NavLink></li> : <li><NavLink to='/user'>User Dashboard</NavLink></li>
         }
     </>
 

@@ -18,7 +18,7 @@ import Dashboard from './Components/HomePage/Dashboard';
 import AuthProvider from './Authentication/AuthProvider';
 import Login from './Authentication/Login';
 import Registration from './Authentication/Registration';
-import User from './Router/User';
+import Users from './Router/Users';
 import MyProfile from './Components/UserDashboard/MyProfile';
 import MyReviews from './Components/UserDashboard/MyReviews';
 import PropertyBought from './Components/UserDashboard/PropertyBought';
@@ -80,7 +80,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/user",
-    element: <PrivateRoute><User></User></PrivateRoute>,
+    element: <PrivateRoute><Users></Users></PrivateRoute>,
     errorElement: <ErrorPage></ErrorPage>,
     children: [
       {

@@ -8,38 +8,38 @@ import { Link } from 'react-router-dom';
 const MyAddedProperties = () => {
     const data = User()
     const axiosSecure = useAxiosSecure();
-    const { data: properties = [], refetch} = useQuery({
+    const { data: properties = [], refetch } = useQuery({
         queryKey: ['property'],
         queryFn: async () => {
             const res = await axiosSecure.get('/property');
             return res.data;
         }
     })
-     const handleDelete = id => {
-            Swal.fire({
-                title: "Are you sure?",
-                text: "You won't be able to revert this!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Yes, delete it!"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    axiosSecure.delete(`/property/${id}`)
-                        .then(res => {
-                            if (res.data.deletedCount > 0) {
-                                refetch()
-                                Swal.fire({
-                                    title: "Deleted!",
-                                    text: "Your file has been deleted.",
-                                    icon: "success"
-                                });
-                            }
-                        })
-                }
-            });
-        }
+    const handleDelete = id => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosSecure.delete(`/property/${id}`)
+                    .then(res => {
+                        if (res.data.deletedCount > 0) {
+                            refetch()
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your file has been deleted.",
+                                icon: "success"
+                            });
+                        }
+                    })
+            }
+        });
+    }
     return (
         <div className='min-h-screen p-4'>
             <h1 className='text-3xl text-center font-bold pb-4'>My added Property{properties.length}</h1>
@@ -73,8 +73,8 @@ const MyAddedProperties = () => {
                                 </div>
                                 <div className="card-actions justify-end">
                                     <Link to={`/agent/update/${property._id}`}>
-                                    <button className="btn btn-primary bg-fuchsia-700 hover:bg-fuchsia-900">Update</button>
-                                    </Link> 
+                                        <button className="btn btn-primary bg-fuchsia-700 hover:bg-fuchsia-900">Update</button>
+                                    </Link>
                                     <button onClick={() => handleDelete(property._id)} className="btn btn-primary bg-fuchsia-700 hover:bg-fuchsia-900">Deleted</button>
                                 </div>
                             </div>
