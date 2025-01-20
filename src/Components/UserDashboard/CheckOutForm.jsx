@@ -12,7 +12,7 @@ const CheckOutForm = () => {
     const stripe = useStripe();
     const elements = useElements();
     const axiosSecure = useAxiosSecure();
-    const data = User();
+    const currentUser = User();
     // const [cart, refetch] = useCart();
     const navigate = useNavigate();
 
@@ -64,8 +64,8 @@ const CheckOutForm = () => {
             payment_method: {
                 card: card,
                 billing_details: {
-                    email: data?.email || 'anonymous',
-                    name: data?.name || 'anonymous'
+                    email: currentUser?.email || 'anonymous',
+                    name: currentUser?.name || 'anonymous'
                 }
             }
         })

@@ -5,9 +5,9 @@ import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 
 const PropertyBought = () => {
-    const data = User();
+    const currentUser = User();
     const axiosSecure = useAxiosSecure();
-    const email = data.email;
+    const email = currentUser.email;
     const { data: bought = [] } = useQuery({
         queryKey: ['email', email],
         queryFn: async () => {

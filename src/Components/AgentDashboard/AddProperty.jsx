@@ -9,8 +9,8 @@ const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
 const AddProperty = () => {
-    const data = User()
-    console.log(data)
+    const currentUser = User()
+    console.log(currentUser)
 
     const { register, handleSubmit, reset } = useForm();
     const axiosPublic = useAxiosPublic();
@@ -44,7 +44,7 @@ const AddProperty = () => {
                 Swal.fire({
                     position: "top-end",
                     icon: "success",
-                    title: `${data.name} is added to the menu.`,
+                    title: `${currentUser.name} is added to the menu.`,
                     showConfirmButton: false,
                     timer: 1500
                 });
@@ -91,7 +91,7 @@ const AddProperty = () => {
                                         placeholder="Property Location"
                                         {...register('name', { required: true })}
                                         required
-                                        className="input input-bordered w-full" defaultValue={data.name} readOnly />
+                                        className="input input-bordered w-full" defaultValue={currentUser?.name} readOnly />
                                 </div>
                                 <div className="form-control">
                                     <label className="label">
@@ -102,7 +102,7 @@ const AddProperty = () => {
                                         placeholder="Property Location"
                                         {...register('email', { required: true })}
                                         required
-                                        className="input input-bordered w-full" defaultValue={data.email} readOnly/>
+                                        className="input input-bordered w-full" defaultValue={currentUser?.email} readOnly/>
                                 </div>
                                 <div className="form-control">
                                     <label className="label">

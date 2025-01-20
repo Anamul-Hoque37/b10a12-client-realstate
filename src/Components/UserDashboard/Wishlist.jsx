@@ -5,9 +5,9 @@ import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 
 const Wishlist = () => {
-    const data = User();
+    const currentUser = User();
     const axiosSecure = useAxiosSecure();
-    const email = data.email;
+    const email = currentUser.email;
     const { data: wishlist = [] } = useQuery({
         queryKey: ['email', email],
         queryFn: async () => {
@@ -42,7 +42,7 @@ const Wishlist = () => {
                                         <p>{property?.priceMin} _ {property?.priceMax}</p>
                                     </div>
                                     <div className='w-16 h-16 border'>
-                                        <img className='h-full w-full' src={data.image} alt={data.name} />
+                                        <img className='h-full w-full' src={currentUser.image} alt={currentUser.name} />
                                     </div>
                                 </div>
                                 <div className="card-actions justify-end">

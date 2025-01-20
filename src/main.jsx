@@ -39,6 +39,7 @@ import UpdateProperty from './Components/AgentDashboard/UpdateProperty';
 import ViewDetails from './Components/HomePage/ViewDetails';
 import MakeOffer from './Components/HomePage/MakeOffer';
 import Payment from './Components/UserDashboard/Payment';
+import AdvertiseProperty from './Components/AdminDashboard/AdvertiseProperty';
 
 const router = createBrowserRouter([
   {
@@ -157,6 +158,10 @@ const router = createBrowserRouter([
       {
         path: '/admin/manage-user',
         element: <ManageUsers></ManageUsers>
+      },
+      {
+        path: '/admin/advertise-property',
+        element: <AdvertiseProperty></AdvertiseProperty>
       }
     ]
   }

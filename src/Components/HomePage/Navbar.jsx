@@ -28,7 +28,7 @@ const Navbar = () => {
         <li><NavLink to="/" >Home</NavLink></li>
         <li><NavLink to='/all-properties'>All Properties</NavLink></li>
         {
-            currentUser?.role === 'admin' ? <li><NavLink to='/admin'>Admin Dashboard</NavLink></li> : currentUser?.role === 'agent' ? <li><NavLink to='/agent'>Agent Dashboard</NavLink></li> : <li><NavLink to='/user'>User Dashboard</NavLink></li>
+          user?.email ?   currentUser?.role === 'admin' ? <li><NavLink to='/admin'>Admin Dashboard</NavLink></li> : currentUser?.role === 'agent' ? <li><NavLink to='/agent'>Agent Dashboard</NavLink></li> : <li><NavLink to='/user'>User Dashboard</NavLink></li> : <li><NavLink to='/login'>Dashboard</NavLink></li>
         }
     </>
 
@@ -84,7 +84,7 @@ const Navbar = () => {
                     </div>
                     <div className='flex'>
                         <div className='rounded-lg'>
-                            {user && user?.email ? (<button onClick={logOut} className='btn'>LogOut</button>) : (<div className='flex gap-1'>
+                            {user && user?.email ? (<Link to="/"><button onClick={logOut} className='btn'>LogOut</button></Link>) : (<div className='flex gap-1'>
                                 <Link to="/login" className='btn'>Login</Link>
                                 <Link to="/registration" className='btn'>Registration</Link>
                             </div>)}

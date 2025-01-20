@@ -29,6 +29,7 @@ const AdminNavbar = () => {
         <li><NavLink to='/admin/manage'>Manage Properties</NavLink></li>
         <li><NavLink to='/admin/manage-review'>Manage Reviews</NavLink></li>
         <li><NavLink to='/admin/manage-user'>Manage Users</NavLink></li>
+        <li><NavLink to='/admin/advertise-property'>Advertise Property</NavLink></li>
         {/* {
             user && <> <li><NavLink to='/add'>Add Tutorial</NavLink></li> </>
         } */}

@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
 
 const MakeOffer = () => {
-    const data = User();
+    const currentUser = User();
     const { name, title, image, location, _id } = useLoaderData();
     const { register, handleSubmit } = useForm();
     const axiosSecure = useAxiosSecure();
@@ -89,7 +89,7 @@ const MakeOffer = () => {
                                         placeholder="Buyer Name"
                                         {...register('buyerName', { required: true })}
                                         required
-                                        className="input input-bordered w-full" defaultValue={data.name} readOnly />
+                                        className="input input-bordered w-full" defaultValue={currentUser.name} readOnly />
                                 </div>
                                 <div className="form-control">
                                     <label className="label">
@@ -100,7 +100,7 @@ const MakeOffer = () => {
                                         placeholder="Property Location"
                                         {...register('buyerEmail', { required: true })}
                                         required
-                                        className="input input-bordered w-full" defaultValue={data.email} readOnly />
+                                        className="input input-bordered w-full" defaultValue={currentUser.email} readOnly />
                                 </div>
                                 <div className="form-control">
                                     <label className="label">

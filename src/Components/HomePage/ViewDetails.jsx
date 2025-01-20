@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 import User from '../../Shared/User';
 
 const ViewDetails = () => {
-    const data = User()
+    const currentUser = User()
     const { name, title, image, priceMin, priceMax, location, email, verifyStatus, _id } = useLoaderData();
     const timeStamp = new Date();
     const axiosSecure = useAxiosSecure();
@@ -20,7 +20,7 @@ const ViewDetails = () => {
             priceMax: priceMax,
             image: image,
             verifyStatus: verifyStatus,
-            UserEmail: data.email,
+            UserEmail: currentUser.email,
             id: _id
         }
         // 
@@ -31,7 +31,7 @@ const ViewDetails = () => {
             Swal.fire({
                 position: "top-end",
                 icon: "success",
-                title: `${data.name} is added to the Wishlist.`,
+                title: `${currentUser.name} is added to the Wishlist.`,
                 showConfirmButton: false,
                 timer: 1500
             });
@@ -39,7 +39,7 @@ const ViewDetails = () => {
             Swal.fire({
                 position: "top-end",
                 icon: "error",
-                title: `${data.name} is already added to the Wishlist.`,
+                title: `${currentUser.name} is already added to the Wishlist.`,
                 showConfirmButton: false,
                 timer: 1500
             });
@@ -56,9 +56,9 @@ const ViewDetails = () => {
             priceMax: priceMax,
             image: image,
             verifyStatus: verifyStatus,
-            reviewEmail: data.email,
-            reviewName: data.name,
-            reviewImage: data.image,
+            reviewEmail: currentUser.email,
+            reviewName: currentUser.name,
+            reviewImage: currentUser.image,
             id: _id,
             createdAt: timeStamp
         }
@@ -70,7 +70,7 @@ const ViewDetails = () => {
             Swal.fire({
                 position: "top-end",
                 icon: "success",
-                title: `${data.name} is added to the Review.`,
+                title: `${currentUser.name} is added to the Review.`,
                 showConfirmButton: false,
                 timer: 1500
             });
@@ -78,7 +78,7 @@ const ViewDetails = () => {
             Swal.fire({
                 position: "top-end",
                 icon: "error",
-                title: `${data.name} is already added to the Review.`,
+                title: `${currentUser.name} is already added to the Review.`,
                 showConfirmButton: false,
                 timer: 1500
             });

@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
 
 const MyAddedProperties = () => {
-    const data = User()
+    const currentUser = User()
     const axiosSecure = useAxiosSecure();
     const { data: properties = [], refetch } = useQuery({
         queryKey: ['property'],
@@ -68,7 +68,7 @@ const MyAddedProperties = () => {
                                         <p>{property?.priceMin} _ {property?.priceMax}</p>
                                     </div>
                                     <div className='w-16 h-16 border'>
-                                        <img className='h-full w-full' src={data.image} alt={data.name} />
+                                        <img className='h-full w-full' src={currentUser?.image} alt={currentUser?.name} />
                                     </div>
                                 </div>
                                 <div className="card-actions justify-end">
