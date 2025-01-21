@@ -11,7 +11,7 @@ import User from '../../Shared/User';
 
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext);
-    const currentUser = User()
+    const currentUser = User();
     console.log(currentUser);
     const [isDarkMode, setIsDarkMode] = useState(false);
     useEffect(() => {

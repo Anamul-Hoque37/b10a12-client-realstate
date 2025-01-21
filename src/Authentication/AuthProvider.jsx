@@ -1,12 +1,15 @@
 import {  createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile } from 'firebase/auth';
 import React, { createContext, useEffect, useState } from 'react';
 import auth from '../../firebase.config';
+import useAxiosPublic from '../Hooks/useAxiosPublic';
 // import axios from 'axios';
 
 export const AuthContext = createContext();
 
 const AuthProvider = ({children}) => {
-    const [user, setUser] = useState({});
+    const axiosPublic = useAxiosPublic();
+    const [user, setUser] = useState(null);
+    console.log(user);
     const [loading, setLoading] = useState(true);
     const createNewUser = (email, password) => {
         setLoading(true)
@@ -38,37 +41,22 @@ const AuthProvider = ({children}) => {
     useEffect(() => {
         const Unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser);
+            console.log(currentUser)
+            console.log("state captured", currentUser?.email);
+            if (currentUser?.email){
+                const user = {email: currentUser.email};
+                axiosPublic.post('/jwt', user)
+                .then(res =>{ 
+                    if (res.data.token){
+                        localStorage.setItem('access-token', res.data.token);
+                    }
+                })
+                
+            }
+            else{
+                localStorage.removeItem('access-token');
+            }
             setLoading(false);
-            // console.log(currentUser)
-            // console.log("state captured", currentUser?.email);
-            // if (currentUser?.email){
-            //     const user = {email: currentUser.email};
-            //     axios.post('https://b10a11-server-side-anamul-hoque37.vercel.app/jwt', user, {withCredentials: true})
-            //     .then(res =>{ 
-            //         console.log('logIn token', res.data)
-            //         setLoading(false);
-            //     })
-            //     fetch('https://b10a11-server-side-anamul-hoque37.vercel.app/user', {
-            //                 method: 'POST',
-            //                 headers: {
-            //                     'content-type': 'application/json'
-            //                 },
-            //                 body: JSON.stringify(user)
-            //             })
-            //                 .then(res => res.json())
-            //                 .then(data => {
-            //                     console.log(data);
-            //                 })
-            // }
-            // else{
-            //     axios.post('https://b10a11-server-side-anamul-hoque37.vercel.app/logout', {}, {
-            //         withCredentials: true
-            //     })
-            //     .then(res => {
-            //         console.log('logout', res.data)
-            //         setLoading(false);
-            //     })
-            // }
         });
         return () => {
             Unsubscribe();

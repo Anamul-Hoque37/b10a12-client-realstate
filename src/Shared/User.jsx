@@ -5,19 +5,19 @@ import { useQuery } from '@tanstack/react-query';
 
 const User = () => {
     const { user } = useContext(AuthContext);
+    console.log(user?.email)
     const axiosSecure = useAxiosSecure();
-    const [currentUser, setCurrentUser]= useState({})
-    const { data: users = [] } = useQuery({
-        queryKey: ['users'],
+    const { data: currentUser = [] } = useQuery({
+        queryKey: ['user', user],
         enabled: !!user,
         queryFn: async () => {
-            const res = await axiosSecure.get('/users');
+            const res = await axiosSecure.get(`/user?user=${user?.email}`);
+            // const d = res.data.find((u) => u.email === user?.email);
             console.log(res)
-            const d = res.data.find((u) => u.email === user?.email);
-            setCurrentUser(d)
             return res.data;
         }
     })
+    console.log(currentUser)
     return currentUser;
 };
 
