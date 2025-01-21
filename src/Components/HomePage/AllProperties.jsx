@@ -11,39 +11,13 @@ const AllProperties = () => {
     const [search, setSearch] = useState('')
     const verifyStatus = 'verify';
 
-    const fetchPropertiesByEmail = async (verifyStatus, location) => {
-        const response = await axiosSecure.get(`/properties?verifyStatus=${verifyStatus}&location=${location}`);
-        console.log(response)
-        return response.data;
-    };
-
-    const {
-        data: properties = [],
-        isLoading,
-        isError,
-        refetch,
-    } = useQuery({
-        queryKey: ["verifyStatus", verifyStatus, search],
-        queryFn: async () => await fetchPropertiesByEmail(verifyStatus, search),
-        // enabled: true // Disable automatic fetch
-    });
-    // const handleSearchChange = (e) => {
-    //     setSearch(e.target.value);
-    //   };
-    
-    //   const handleSearchSubmit = (e) => {
-    //     e.preventDefault();
-    //     refetch(); // Trigger the query manually
-    //   };
-    if (isLoading) return <p>Loading...</p>;
-    if (isError) return <p>Error fetching properties. Please try again.</p>;
-    // const { data: properties = [] } = useQuery({
-    //     queryKey: ['verifyStatus', search],
-    //     queryFn: async () => {
-    //         const res = await axiosSecure.get(`/property/${verifyStatus}`,{ params: {location}});
-    //         return res.data;
-    //     }
-    // })
+    const { data: properties = [] } = useQuery({
+        queryKey: ['verifyStatus', verifyStatus, search],
+        queryFn: async () => {
+            const res = await axiosSecure.get(`/properties?verifyStatus=${verifyStatus}&search=${search}`);
+            return res.data;
+        }
+    })
 
     const [sortOrder, setSortOrder] = useState("default"); // "asc", "desc", "default"
     const sortedProperty = [...properties].sort((a, b) => {
@@ -59,13 +33,11 @@ const AllProperties = () => {
                         className='px-6 py-2 text-gray-700 placeholder-gray-500 bg-white outline-none focus:placeholder-transparent'
                         type='text'
                         name='search'
-                        onChange={e => setSearch(e.target.value)}
+                        onKeyUp={(e) => setSearch(e.target.value)}
                         // onChange={handleSearchChange}
-                        value={search}
                         placeholder='Search By Location'
                         aria-label='Search By Location'
                     />
-
                     <button className='px-1 md:px-4 py-3 text-sm font-medium tracking-wider text-gray-100 uppercase transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:bg-gray-600 focus:outline-none'>
                         Search
                     </button>
