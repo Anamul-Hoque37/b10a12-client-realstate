@@ -8,7 +8,7 @@ const MyReviews = () => {
     const currentUser = User();
     console.log(currentUser)
     const axiosSecure = useAxiosSecure();
-    const email = currentUser.email;
+    const email = currentUser?.email;
     const { data: review = [], refetch } = useQuery({
         queryKey: ['email', email],
         queryFn: async () => {
@@ -70,7 +70,7 @@ const MyReviews = () => {
                                         <p>{property?.priceMin} _ {property?.priceMax}</p>
                                     </div>
                                     <div className='w-16 h-16 border'>
-                                        <img className='h-full w-full' src={currentUser.image} alt={currentUser.name} />
+                                        <img className='h-full w-full' src={currentUser?.image} alt={currentUser?.name} />
                                     </div>
                                 </div>
                                 <div className="card-actions justify-end">

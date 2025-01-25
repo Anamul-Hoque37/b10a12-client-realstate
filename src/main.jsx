@@ -77,94 +77,94 @@ const router = createBrowserRouter([
         path: 'registration',
         element: <Registration></Registration>,
       },
+      {
+        path: "/admin",
+        element: <Admin></Admin>,
+        errorElement: <ErrorPage></ErrorPage>,
+        children: [
+          {
+            path: '/admin',
+            element: <AdminProfile></AdminProfile>,
+          },
+          {
+            path: '/admin/manage',
+            element: <ManageProperties></ManageProperties>,
+          },
+          {
+            path: '/admin/manage-review',
+            element: <ManageReviews></ManageReviews>,
+          },
+          {
+            path: '/admin/manage-user',
+            element: <ManageUsers></ManageUsers>
+          },
+          {
+            path: '/admin/advertise-property',
+            element: <AdvertiseProperty></AdvertiseProperty>
+          }
+        ]
+      },
+      {
+        path: "/user",
+        element: <PrivateRoute><Users></Users></PrivateRoute>,
+        errorElement: <ErrorPage></ErrorPage>,
+        children: [
+          {
+            path: '/user',
+            element: <MyProfile></MyProfile>,
+          },
+          {
+            path:'/user/payment',
+            element: <Payment></Payment>,
+          },
+          {
+            path: '/user/my-reviews',
+            element: <MyReviews></MyReviews>,
+          },
+          {
+            path: '/user/property',
+            element: <PropertyBought></PropertyBought>,
+          },
+          {
+            path: '/user/wishlist',
+            element: <Wishlist></Wishlist>,
+          },
+        ]
+      },
+      {
+        path: "/agent",
+        element: <Agent></Agent>,
+        errorElement: <ErrorPage></ErrorPage>,
+        children: [
+          {
+            path: '/agent',
+            element: <AgentProfile></AgentProfile>,
+          },
+          {
+            path: '/agent/add-property',
+            element: <AddProperty></AddProperty>,
+          },
+          {
+            path: '/agent/added-property',
+            element: <MyAddedProperties></MyAddedProperties>,
+          },
+          {
+            path: '/agent/sold-property',
+            element: <MySoldProperties></MySoldProperties>,
+          },
+          {
+            path: '/agent/offer',
+            element: <OfferedProperties></OfferedProperties>,
+          },
+          {
+            path: '/agent/update/:id',
+            element: <UpdateProperty></UpdateProperty>,
+            loader: ({params}) => fetch(`http://localhost:5000/update/property/${params.id}`)
+          },
+        ]
+      },
     ]
   },
-  {
-    path: "/user",
-    element: <PrivateRoute><Users></Users></PrivateRoute>,
-    errorElement: <ErrorPage></ErrorPage>,
-    children: [
-      {
-        path: '/user',
-        element: <MyProfile></MyProfile>,
-      },
-      {
-        path:'/user/payment',
-        element: <Payment></Payment>,
-      },
-      {
-        path: '/user/my-reviews',
-        element: <MyReviews></MyReviews>,
-      },
-      {
-        path: '/user/property',
-        element: <PropertyBought></PropertyBought>,
-      },
-      {
-        path: '/user/wishlist',
-        element: <Wishlist></Wishlist>,
-      },
-    ]
-  },
-  {
-    path: "/agent",
-    element: <Agent></Agent>,
-    errorElement: <ErrorPage></ErrorPage>,
-    children: [
-      {
-        path: '/agent',
-        element: <AgentProfile></AgentProfile>,
-      },
-      {
-        path: '/agent/add-property',
-        element: <AddProperty></AddProperty>,
-      },
-      {
-        path: '/agent/added-property',
-        element: <MyAddedProperties></MyAddedProperties>,
-      },
-      {
-        path: '/agent/sold-property',
-        element: <MySoldProperties></MySoldProperties>,
-      },
-      {
-        path: '/agent/offer',
-        element: <OfferedProperties></OfferedProperties>,
-      },
-      {
-        path: '/agent/update/:id',
-        element: <UpdateProperty></UpdateProperty>,
-        loader: ({params}) => fetch(`http://localhost:5000/update/property/${params.id}`)
-      },
-    ]
-  },
-  {
-    path: "/admin",
-    element: <Admin></Admin>,
-    errorElement: <ErrorPage></ErrorPage>,
-    children: [
-      {
-        path: '/admin',
-        element: <AdminProfile></AdminProfile>,
-      },
-      {
-        path: '/admin/manage',
-        element: <ManageProperties></ManageProperties>,
-      },
-      {
-        path: '/admin/manage-review',
-        element: <ManageReviews></ManageReviews>,
-      },
-      {
-        path: '/admin/manage-user',
-        element: <ManageUsers></ManageUsers>
-      },
-      {
-        path: '/admin/advertise-property',
-        element: <AdvertiseProperty></AdvertiseProperty>
-      }
-    ]
-  }
 ]);
 
 const queryClient = new QueryClient()

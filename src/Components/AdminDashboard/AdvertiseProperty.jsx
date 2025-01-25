@@ -6,15 +6,31 @@ import Swal from 'sweetalert2';
 const AdvertiseProperty = () => {
     const axiosSecure = useAxiosSecure();
     const verifyStatus = 'verify';
-    const { data: properties = [] } = useQuery({
-        queryKey: ['verifyStatus'],
+    const { data: properties = [], refetch} = useQuery({
+        queryKey: ['verifyStatus', verifyStatus],
         queryFn: async() => {
-            const res = await axiosSecure.get(`/property/${verifyStatus}`);
+            const res = await axiosSecure.get(`/property/adds?verifyStatus=${verifyStatus}`);
             return res.data;
         }
     })
     const handleView = data => {
         axiosSecure.patch(`/property/adds/${data._id}`)
+            .then(res => {
+                console.log(res.data)
+                if (res.data.modifiedCount > 0) {
+                    refetch()
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: `${data.name} is a Add Advertisement Section!`,
+                        showConfirmButton: false,
+                        timer: 2000
+                    });
+                }
+            })
+    }
+    const handleHide = data => {
+        axiosSecure.patch(`/property/hide/${data._id}`)
             .then(res => {
                 console.log(res.data)
                 if (res.data.modifiedCount > 0) {
@@ -55,7 +71,7 @@ const AdvertiseProperty = () => {
                                 <td className="border border-gray-200 px-4">{data.priceMin}</td>
                                 <td className="border border-gray-200 px-4">{data.priceMax}</td>
                                 <td className="border border-gray-200 ">
-                                    {data.adds === 'adds' ? <button className='btn btn-primary w-full bg-lime-500 text-center h-full text-white'>View</button> : <button onClick={() => handleView(data)} className="btn btn-primary w-full bg-fuchsia-700 hover:bg-fuchsia-900  text-white">Not View</button>}
+                                    {data.adds === 'adds' ? <button onClick={() => handleHide(data)} className='btn btn-primary w-full bg-lime-500 text-center h-full text-white'>Advertise</button> : <button onClick={() => handleView(data)} className="btn btn-primary w-full bg-fuchsia-700 hover:bg-fuchsia-900  text-white">Not Advertise</button>}
                                 </td>
                             </tr>
                         ))}

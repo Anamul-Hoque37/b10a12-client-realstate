@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
@@ -9,6 +9,9 @@ const ViewDetails = () => {
     const { name, title, image, priceMin, priceMax, location, email, verifyStatus, _id } = useLoaderData();
     const timeStamp = new Date();
     const axiosSecure = useAxiosSecure();
+    const [isModalOpen, setModalOpen] = useState(false);
+    const [reviewText, setReviewText] = useState('');
+    const [rating, setRating] = useState(0);
     const handleAddWishlist = async () => {
         // now send the menu item data to the server with the image url
         const wishlist = {
@@ -46,8 +49,14 @@ const ViewDetails = () => {
         }
     };
     const handleAddReview = async () => {
+        if (!reviewText || rating <= 0) {
+            alert('Please provide a review and rating.');
+            return;
+        }
         // now send the menu item data to the server with the image url
         const reviewList = {
+            description: reviewText,
+            rating: rating,
             title: title,
             location: location,
             name: name,
@@ -101,12 +110,50 @@ const ViewDetails = () => {
                         <div className='flex gap-6'>
                             <button onClick={handleAddWishlist} className="btn btn-primary">Add to Wishlist
                             </button>
-                            <button onClick={handleAddReview} className="btn btn-primary">Add A Review
-                            </button>
+                            {/* <button onClick={handleAddReview} className="btn btn-primary">Add A Review
+                            </button> */}
                         </div>
                     </div>
                 </div>
             </div>
+            {/* Add a Review Button */}
+            <button className="mt-4 px-4 py-2 bg-blue-500 text-white rounded" onClick={() => setModalOpen(true)}>
+                Add a Review
+            </button>
+
+            {/* Add Review Modal */}
+            {isModalOpen && (
+                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                    <div className="bg-white p-6 rounded shadow-lg">
+                        <h2 className="text-lg font-bold mb-4">Add a Review</h2>
+                        <textarea
+                            className="w-full p-2 border rounded mb-4"
+                            rows="4"
+                            placeholder="Write your review here..."
+                            value={reviewText}
+                            onChange={(e) => setReviewText(e.target.value)}
+                        ></textarea>
+                        <input
+                            type="number"
+                            className="w-full p-2 border rounded mb-4"
+                            placeholder="Rating (1-5)"
+                            value={rating}
+                            onChange={(e) => setRating(e.target.value)}
+                        />
+                        <div className="flex justify-end">
+                            <button
+                                className="px-4 py-2 bg-gray-400 text-white rounded mr-2"
+                                onClick={() => setModalOpen(false)}
+                            >
+                                Cancel
+                            </button>
+                            <button className="px-4 py-2 bg-blue-500 text-white rounded" onClick={handleAddReview}>
+                                Submit
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

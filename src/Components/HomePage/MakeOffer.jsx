@@ -20,7 +20,7 @@ const MakeOffer = () => {
             image: image,
             buyerName: data.buyerName,
             buyerEmail: data.buyerEmail,
-            offerPrice: data.offerPrice,
+            price: parseInt(data.offerPrice),
             date: data.date,
             id: _id
         }

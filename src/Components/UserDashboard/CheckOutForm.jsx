@@ -4,6 +4,8 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import User from "../../Shared/User";
+import { useQuery } from "@tanstack/react-query";
+
 
 const CheckOutForm = () => {
     const [error, setError] = useState('');
@@ -13,22 +15,31 @@ const CheckOutForm = () => {
     const elements = useElements();
     const axiosSecure = useAxiosSecure();
     const currentUser = User();
-    // const [cart, refetch] = useCart();
     const navigate = useNavigate();
 
-    // const totalPrice = cart.reduce((total, item) => total + item.price, 0)
+    const email = currentUser.email;
+    const { data: bought = [] } = useQuery({
+        queryKey: ['email', email],
+        queryFn: async () => {
+            const res = await axiosSecure.get(`/bought/${email}`);
+            return res.data;
+        }
+    })
+
+    const totalPrice = bought.reduce((total, item) => total + item.price, 0)
+    console.log(parseInt(totalPrice));
 
     useEffect(() => {
-        // if (totalPrice > 0) {
-        //     axiosSecure.post('/create-payment-intent', { price: totalPrice })
-        //         .then(res => {
-        //             console.log(res.data.clientSecret);
-        //             setClientSecret(res.data.clientSecret);
-        //         })
-        // }
+        if (totalPrice > 0) {
+            axiosSecure.post('/create-payment-intent', { price: totalPrice })
+                .then(res => {
+                    console.log(res.data.clientSecret);
+                    setClientSecret(res.data.clientSecret);
+                })
+        }
 
     }, 
-    // [axiosSecure, totalPrice]
+    [axiosSecure, totalPrice]
 )
 
     const handleSubmit = async (event) => {
@@ -110,8 +121,10 @@ const CheckOutForm = () => {
 
     }
     return (
-        <form onSubmit={handleSubmit}>
+        <div className="w-11/12 mx-auto bg-fuchsia-600 p-8 rounded-md">
+            <form onSubmit={handleSubmit} className="w-full">
             <CardElement
+            className="bg-white p-4 gap-6 rounded-md"
                 options={{
                     style: {
                         base: {
@@ -127,12 +140,13 @@ const CheckOutForm = () => {
                     },
                 }}
             />
-            <button className="btn btn-sm btn-primary my-4" type="submit" disabled={!stripe || !clientSecret}>
+            <button className="btn bg-green-400 hover:bg-green-600 my-4 px-8 text-2xl" type="submit" disabled={!stripe || !clientSecret}>
                 Pay
             </button>
-            <p className="text-red-600">{error}</p>
+            <p className="text-white">{error}</p>
             {transactionId && <p className="text-green-600"> Your transaction id: {transactionId}</p>}
         </form>
+        </div>
     );
 };
 

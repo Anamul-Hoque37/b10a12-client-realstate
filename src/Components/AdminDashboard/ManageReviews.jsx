@@ -39,14 +39,14 @@ const ManageReviews = () => {
     }
     return (
         <div className='min-h-screen p-4'>
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
+            <div className='grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4'>
                 {
                     review.map((property) => (
-                        <div key={property._id} className="card bg-base-100 w-96 shadow-xl">
+                        <div key={property._id} className="card bg-base-100 shadow-xl">
                             <figure className="px-10 pt-10">
                                 <img
                                     src={property.reviewImage}
-                                    alt="Shoes"
+                                    alt="Reviewer Image"
                                     className="rounded-xl" />
                             </figure>
                             <div className="card-body items-center text-center">
