@@ -28,12 +28,17 @@ const PropertyBought = () => {
                                     alt="Shoes" />
                             </figure>
                             <div className="card-body bg-white h-1/2">
-                                <h2 className="card-title">
-                                    Verification!
-                                    <div className="badge badge-secondary bg-purple-500 p-3">
-                                        {property?.Status === 'accept' ? "Accepted" : "pending"}
+                                <div className='flex justify-between'>
+                                    <h2 className="card-title">
+                                        Verification!
+                                        <div className="badge badge-secondary bg-purple-500 p-3">
+                                            {property?.Status === 'accept' ? "Accepted" : "pending"}
+                                        </div>
+                                    </h2>
+                                    <div className="flex justify-end">
+                                        {property?.transactionId ? <div><button className="btn btn-primary p-2 bg-green-600 hover:bg-fuchsia-900">Bought</button></div> : property?.Status === 'accept' ? <Link to={`/user/payment/${property._id}`}><button className="btn btn-primary bg-fuchsia-700 hover:bg-fuchsia-900">Pay</button></Link> : ""}
                                     </div>
-                                </h2>
+                                </div>
                                 <div className='flex justify-between items-start'>
                                     <div className='flex flex-col gap-0'>
                                         <p>{property.title}</p>
@@ -42,9 +47,7 @@ const PropertyBought = () => {
                                         <p>{property?.offerPrice}</p>
                                     </div>
                                 </div>
-                                <div className="flex justify-end">
-                                    {property?.Status === 'accept' ? <Link to='/user/payment'><button className="btn btn-primary bg-fuchsia-700 hover:bg-fuchsia-900">Pay</button></Link> : ""}
-                                </div>
+
                             </div>
                         </div>
                     ))

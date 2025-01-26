@@ -1,6 +1,6 @@
 import React from 'react';
 import User from '../../Shared/User';
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
@@ -10,6 +10,7 @@ const MakeOffer = () => {
     const { name, title, image, location, _id } = useLoaderData();
     const { register, handleSubmit } = useForm();
     const axiosSecure = useAxiosSecure();
+    const navigate = useNavigate();
     const onSubmit = async (data) => {
         console.log(data)
         // now send the menu item data to the server with the image url
@@ -20,14 +21,14 @@ const MakeOffer = () => {
             image: image,
             buyerName: data.buyerName,
             buyerEmail: data.buyerEmail,
-            price: parseInt(data.offerPrice),
+            offerPrice: parseInt(data.offerPrice),
             date: data.date,
             id: _id
         }
         // 
         const offerData = await axiosSecure.post('/bought', makeOffer);
         console.log(offerData.data)
-        if (offerData.data.modifiedCount > 0) {
+        if (offerData.data.insertedId) {
             // show success popup
             Swal.fire({
                 position: "top-end",
@@ -36,6 +37,16 @@ const MakeOffer = () => {
                 showConfirmButton: false,
                 timer: 1500
             });
+            navigate('/user/wishlist')
+        }else{
+            Swal.fire({
+                position: "top-end",
+                icon: "error",
+                title: `${data.name} is Offered the Property already added.`,
+                showConfirmButton: false,
+                timer: 1500
+            });
+            navigate('/user/wishlist')
         }
     };
     return (

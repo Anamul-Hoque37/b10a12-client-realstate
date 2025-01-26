@@ -7,7 +7,8 @@ import User from "../../Shared/User";
 import { useQuery } from "@tanstack/react-query";
 
 
-const CheckOutForm = () => {
+const CheckOutForm = ({ id }) => {
+
     const [error, setError] = useState('');
     const [clientSecret, setClientSecret] = useState('')
     const [transactionId, setTransactionId] = useState('');
@@ -17,30 +18,29 @@ const CheckOutForm = () => {
     const currentUser = User();
     const navigate = useNavigate();
 
-    const email = currentUser.email;
+
     const { data: bought = [] } = useQuery({
-        queryKey: ['email', email],
+        queryKey: ['id', id],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/bought/${email}`);
+            const res = await axiosSecure.get(`/bought/payment/${id}`);
             return res.data;
         }
     })
-
-    const totalPrice = bought.reduce((total, item) => total + item.price, 0)
-    console.log(parseInt(totalPrice));
+    console.log(bought)
+    const price = bought.offerPrice
 
     useEffect(() => {
-        if (totalPrice > 0) {
-            axiosSecure.post('/create-payment-intent', { price: totalPrice })
+        if (price > 0) {
+            axiosSecure.post('/create-payment-intent', { price: price })
                 .then(res => {
                     console.log(res.data.clientSecret);
                     setClientSecret(res.data.clientSecret);
                 })
         }
 
-    }, 
-    [axiosSecure, totalPrice]
-)
+    },
+        [axiosSecure, price]
+    )
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -92,28 +92,36 @@ const CheckOutForm = () => {
 
                 // now save the payment in the database
                 const payment = {
-                    // email: user.email,
-                    // price: totalPrice,
-                    // transactionId: paymentIntent.id,
-                    // date: new Date(), // utc date convert. use moment js to 
-                    // cartIds: cart.map(item => item._id),
-                    // menuItemIds: cart.map(item => item.menuId),
-                    // status: 'pending'
+                    transactionId: paymentIntent.id,
                 }
 
-                const res = await axiosSecure.post('/payments', payment);
-                console.log('payment saved', res.data);
-                refetch();
-                if (res.data?.paymentResult?.insertedId) {
+                const paymentData = await axiosSecure.patch(`/bought/${id}`, payment);
+                console.log(paymentData.data)
+                if (paymentData.data.modifiedCount > 0) {
+                    // show success popup
                     Swal.fire({
                         position: "top-end",
                         icon: "success",
-                        title: "Thank you for the taka paisa",
+                        title: `${bought.name} is updated to the Bought.`,
                         showConfirmButton: false,
                         timer: 1500
                     });
-                    navigate('/dashboard/paymentHistory')
+                    navigate('/user/property')
                 }
+
+                // const res = await axiosSecure.post('/payments', payment);
+                // console.log('payment saved', res.data);
+                // refetch();
+                // if (res.data?.paymentResult?.insertedId) {
+                //     Swal.fire({
+                //         position: "top-end",
+                //         icon: "success",
+                //         title: "Thank you for the taka paisa",
+                //         showConfirmButton: false,
+                //         timer: 1500
+                //     });
+                //     navigate('/dashboard/paymentHistory')
+                // }
 
             }
         }
@@ -123,29 +131,29 @@ const CheckOutForm = () => {
     return (
         <div className="w-11/12 mx-auto bg-fuchsia-600 p-8 rounded-md">
             <form onSubmit={handleSubmit} className="w-full">
-            <CardElement
-            className="bg-white p-4 gap-6 rounded-md"
-                options={{
-                    style: {
-                        base: {
-                            fontSize: '16px',
-                            color: '#424770',
-                            '::placeholder': {
-                                color: '#aab7c4',
+                <CardElement
+                    className="bg-white p-4 gap-6 rounded-md"
+                    options={{
+                        style: {
+                            base: {
+                                fontSize: '16px',
+                                color: '#424770',
+                                '::placeholder': {
+                                    color: '#aab7c4',
+                                },
+                            },
+                            invalid: {
+                                color: '#9e2146',
                             },
                         },
-                        invalid: {
-                            color: '#9e2146',
-                        },
-                    },
-                }}
-            />
-            <button className="btn bg-green-400 hover:bg-green-600 my-4 px-8 text-2xl" type="submit" disabled={!stripe || !clientSecret}>
-                Pay
-            </button>
-            <p className="text-white">{error}</p>
-            {transactionId && <p className="text-green-600"> Your transaction id: {transactionId}</p>}
-        </form>
+                    }}
+                />
+                <button className="btn bg-green-400 hover:bg-green-600 my-4 px-8 text-2xl" type="submit" disabled={!stripe || !clientSecret}>
+                    Pay
+                </button>
+                <p className="text-white">{error}</p>
+                {transactionId && <p className="text-green-600"> Your transaction id: {transactionId}</p>}
+            </form>
         </div>
     );
 };
