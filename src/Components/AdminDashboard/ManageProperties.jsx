@@ -57,7 +57,7 @@ const ManageProperties = () => {
                             <th className="border w-1/4 border-gray-200 px-4 py-2 text-left font-medium text-gray-700">Property Location</th>
                             <th className="border w-1/4 border-gray-200 px-4 py-2 text-left font-medium text-gray-700">Agent Name</th>
                             <th className="border w-1/3 border-gray-200 px-4 py-2 text-left font-medium text-gray-700">Agent Email</th>
-                            <th className="border w-1/3 border-gray-200 px-4 py-2 text-left font-medium text-gray-700">Price Max</th>
+                            <th className="border w-1/3 border-gray-200 px-4 py-2 text-left font-medium text-gray-700">Price Min</th>
                             <th className="border w-1/3 border-gray-200 px-4 py-2 text-left font-medium text-gray-700">Price Max</th>
                             <th className="border w-1/6 border-gray-200 px-4 py-2 text-left font-medium text-gray-700">Make Admin</th>
                             <th className="border w-1/6 border-gray-200 px-4 py-2 text-left font-medium text-gray-700">Make Agent</th>

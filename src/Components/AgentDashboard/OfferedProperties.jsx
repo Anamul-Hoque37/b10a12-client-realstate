@@ -59,8 +59,8 @@ const OfferedProperties = () => {
                         <tr className="bg-gray-100">
                             <th className="border w-1/4 border-gray-200 px-4 py-2 text-left font-medium text-gray-700">Property Title</th>
                             <th className="border w-1/4 border-gray-200 px-4 py-2 text-left font-medium text-gray-700">Property Location</th>
-                            <th className="border w-1/4 border-gray-200 px-4 py-2 text-left font-medium text-gray-700">Agent Name</th>
-                            <th className="border w-1/3 border-gray-200 px-4 py-2 text-left font-medium text-gray-700">Agent Email</th>
+                            <th className="border w-1/4 border-gray-200 px-4 py-2 text-left font-medium text-gray-700">Buyer Name</th>
+                            <th className="border w-1/3 border-gray-200 px-4 py-2 text-left font-medium text-gray-700">Buyer Email</th>
                             <th className="border w-1/3 border-gray-200 px-4 py-2 text-left font-medium text-gray-700">Offer Price</th>
                             <th className="border w-1/6 border-gray-200 px-4 py-2 text-left font-medium text-gray-700">Make Accept</th>
                             <th className="border w-1/6 border-gray-200 px-4 py-2 text-left font-medium text-gray-700">Make Reject</th>
@@ -71,8 +71,8 @@ const OfferedProperties = () => {
                             <tr key={data._id}>
                                 <td className="border border-gray-200 px-4">{data.title}</td>
                                 <td className="border border-gray-200 px-4">{data.location}</td>
-                                <td className="border border-gray-200 px-4">{data.name}</td>
-                                <td className="border border-gray-200 px-4">{data.email}</td>
+                                <td className="border border-gray-200 px-4">{data.buyerName}</td>
+                                <td className="border border-gray-200 px-4">{data.buyerEmail}</td>
                                 <td className="border border-gray-200 px-4">{data.offerPrice}</td>
                                 <td className="border border-gray-200 ">
                                     {data.Status === 'accept' ? <button className='btn btn-primary w-full bg-green-600 text-center h-full text-white'>Accepted</button> : <button onClick={() => handleAccept(data)} className="btn btn-primary w-full bg-fuchsia-700 hover:bg-fuchsia-900  text-white">Make Accept</button>}

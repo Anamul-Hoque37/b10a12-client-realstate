@@ -54,18 +54,18 @@ const AdvertiseProperty = () => {
                 <table className="min-w-full border-collapse border border-gray-200 shadow-md">
                     <thead>
                         <tr className="bg-gray-100">
-                            <th className="border w-1/4 border-gray-200 px-4 py-2 text-left font-medium text-gray-700">Property Image</th>
-                            <th className="border w-1/4 border-gray-200 px-4 py-2 text-left font-medium text-gray-700">Property Title</th>
-                            <th className="border w-1/4 border-gray-200 px-4 py-2 text-left font-medium text-gray-700">Agent Name</th>
-                            <th className="border w-1/3 border-gray-200 px-4 py-2 text-left font-medium text-gray-700">Price Max</th>
-                            <th className="border w-1/3 border-gray-200 px-4 py-2 text-left font-medium text-gray-700">Price Max</th>
+                            <th className="border w-1/6 border-gray-200 px-4 py-2 text-left font-medium text-gray-700">Property Image</th>
+                            <th className="border w-1/3 border-gray-200 px-4 py-2 text-left font-medium text-gray-700">Property Title</th>
+                            <th className="border w-1/6 border-gray-200 px-4 py-2 text-left font-medium text-gray-700">Agent Name</th>
+                            <th className="border w-1/12 border-gray-200 px-4 py-2 text-left font-medium text-gray-700">Price Min</th>
+                            <th className="border w-1/12 border-gray-200 px-4 py-2 text-left font-medium text-gray-700">Price Max</th>
                             <th className="border w-1/6 border-gray-200 px-4 py-2 text-left font-medium text-gray-700">Advertise</th>
                         </tr>
                     </thead>
                     <tbody>
                         {properties.map((data) => (
                             <tr key={data._id}>
-                                <td className="border border-gray-200 px-4"><img src={data.image} alt="" /></td>
+                                <td className="border border-gray-200"><img className='w-44 h-14' src={data.image} alt="" /></td>
                                 <td className="border border-gray-200 px-4">{data.title}</td>
                                 <td className="border border-gray-200 px-4">{data.name}</td>
                                 <td className="border border-gray-200 px-4">{data.priceMin}</td>
