@@ -27,17 +27,15 @@ const PropertyBought = () => {
                                     src={property.image}
                                     alt="Shoes" />
                             </figure>
-                            <div className="card-body w-full bg-white h-1/2">
-                                <div className='flex justify-between'>
+                            <div className="card-body w-full bg-white">
+                                <div className='flex justify-between items-center'>
                                     <h2 className="card-title">
                                         Verification!
-                                        <div className="badge badge-secondary bg-purple-500 p-1">
+                                        <div className="badge badge-secondary bg-purple-500 p-4">
                                             {property?.Status === 'accept' ? "Accepted" : "pending"}
                                         </div>
                                     </h2>
-                                    <div className="flex justify-end">
-                                        {property?.transactionId ? <div><button className="btn btn-primary p-2 bg-green-600 hover:bg-fuchsia-900">Bought</button></div> : property?.Status === 'accept' ? <Link to={`/user/payment/${property._id}`}><button className="btn btn-primary bg-fuchsia-700 hover:bg-fuchsia-900">Pay</button></Link> : ""}
-                                    </div>
+                                    
                                 </div>
                                 <div className='flex justify-between items-start'>
                                     <div className='flex flex-col gap-0'>
@@ -45,6 +43,9 @@ const PropertyBought = () => {
                                         <p>{property.location}</p>
                                         <p>{property.name}</p>
                                         <p>{property?.offerPrice}</p>
+                                    </div>
+                                    <div className="flex justify-end">
+                                        {property?.transactionId ? <div><button className="btn btn-primary p-2 bg-green-600 hover:bg-fuchsia-900">Bought</button></div> : property?.Status === 'accept' ? <Link to={`/user/payment/${property._id}`}><button className="btn btn-primary bg-fuchsia-700 hover:bg-fuchsia-900">Pay</button></Link> : ""}
                                     </div>
                                 </div>
 

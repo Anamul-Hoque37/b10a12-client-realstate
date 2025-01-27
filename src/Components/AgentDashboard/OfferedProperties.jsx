@@ -2,16 +2,20 @@ import React from 'react';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import Swal from 'sweetalert2';
+import User from '../../Shared/User';
 
 const OfferedProperties = () => {
+    const currentUser = User();
     const axiosSecure = useAxiosSecure();
-    const { data: offers = [], refetch } = useQuery({
+    const { data: offer = [], refetch } = useQuery({
         queryKey: ['offer'],
         queryFn: async () => {
             const res = await axiosSecure.get('/offer');
             return res.data;
         }
     })
+    const offers = offer.filter((user) => user.email === currentUser.email);
+    console.log(offers)
     const handleAccept = data => {
         axiosSecure.patch(`/bought/accept/${data._id}`)
             .then(res => {

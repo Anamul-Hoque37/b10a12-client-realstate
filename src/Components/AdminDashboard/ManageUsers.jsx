@@ -3,6 +3,7 @@ import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { MdVerifiedUser } from 'react-icons/md';
 
 const ManageUsers = () => {
     const axiosSecure = useAxiosSecure();
@@ -46,6 +47,22 @@ const ManageUsers = () => {
                 }
             })
     }
+    const handleMakeAsFraud = data => {
+        axiosSecure.patch(`/users/fraud/${data._id}`)
+            .then(res => {
+                console.log(res.data)
+                if (res.data.modifiedCount > 0) {
+                    refetch()
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: `${data.name} is an Fraud Now!`,
+                        showConfirmButton: false,
+                        timer: 2000
+                    });
+                }
+            })
+    }
     const handleDelete = id => {
         Swal.fire({
             title: "Are you sure?",
@@ -80,12 +97,12 @@ const ManageUsers = () => {
                 <table className="min-w-full border-collapse border border-gray-200 shadow-md">
                     <thead>
                         <tr className="bg-gray-100">
-                            <th className="border w-1/4 border-gray-200 px-4 py-2 text-left font-medium text-gray-700">Name</th>
-                            <th className="border w-1/3 border-gray-200 px-4 py-2 text-left font-medium text-gray-700">Email</th>
+                            <th className="border w-1/6 border-gray-200 px-4 py-2 text-left font-medium text-gray-700">Name</th>
+                            <th className="border w-1/4 border-gray-200 px-4 py-2 text-left font-medium text-gray-700">Email</th>
                             <th className="border w-1/6 border-gray-200 px-4 py-2 text-left font-medium text-gray-700">Make Admin</th>
                             <th className="border w-1/6 border-gray-200 px-4 py-2 text-left font-medium text-gray-700">Make Agent</th>
+                            <th className="border w-1/6 border-gray-200 px-4 py-2 text-left font-medium text-gray-700">Make as fraud</th>
                             <th className="border w-1/12 border-gray-200 px-4 py-2 text-left font-medium text-gray-700">Delete</th>
-
                         </tr>
                     </thead>
                     <tbody>
@@ -94,10 +111,13 @@ const ManageUsers = () => {
                                 <td className="border border-gray-200 px-4">{data.name}</td>
                                 <td className="border border-gray-200 px-4">{data.email}</td>
                                 <td className="border border-gray-200 ">
-                                    {data.role === 'admin' ? <button className='btn btn-primary w-full bg-green-600 text-center h-full text-white'>Admin</button> : <button onClick={() => handleMakeAdmin(data)} className="btn btn-primary w-full bg-fuchsia-700 hover:bg-fuchsia-900  text-white">Make Admin</button>}
+                                    {data.role === 'fraud' ? <button className='btn btn-primary w-full bg-red-500 text-center h-full text-white'>Fraud</button> : data.role === 'admin' ? <button className='btn btn-primary w-full bg-green-600 text-center h-full text-white'>Admin</button> : <button onClick={() => handleMakeAdmin(data)} className="btn btn-primary w-full bg-fuchsia-700 hover:bg-fuchsia-900  text-white">Make Admin</button>}
                                 </td>
                                 <td className="border border-gray-200 ">
-                                    {data.role === 'agent' ? <button className='btn btn-primary w-full bg-lime-500 text-center h-full text-white'>Agent</button> : <button onClick={() => handleMakeAgent(data)} className="btn btn-primary w-full bg-fuchsia-700 hover:bg-fuchsia-900  text-white">Make Agent</button>}
+                                    {data.role === 'fraud' ? <button className='btn btn-primary w-full bg-red-500 text-center h-full text-white'>Fraud</button> : data.role === 'agent' ? <button className='btn btn-primary w-full bg-lime-500 text-center h-full text-white'>Agent</button> : <button onClick={() => handleMakeAgent(data)} className="btn btn-primary w-full bg-fuchsia-700 hover:bg-fuchsia-900  text-white">Make Agent</button>}
+                                </td>
+                                <td className="border border-gray-200 ">
+                                    {data.role === 'agent' ? <button onClick={() => handleMakeAsFraud(data)} className='btn btn-primary w-full bg-lime-500 text-center h-full text-white'>Make As Fraud</button> : data.role === 'fraud' ? <button className='btn btn-primary w-full bg-red-500 text-center h-full text-white'>Fraud</button> :<button className="btn btn-primary w-full bg-fuchsia-700 hover:bg-fuchsia-900 text-3xl text-green-700"><MdVerifiedUser /></button>}
                                 </td>
                                 <td className="border border-gray-200"><button onClick={() => handleDelete(data._id)} className="btn btn-primary w-full bg-fuchsia-700 hover:bg-fuchsia-900 text-white">Delete</button></td>
                             </tr>

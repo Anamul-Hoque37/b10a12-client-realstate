@@ -12,10 +12,12 @@ const LatestUser = () => {
         }
     })
     return (
-        <div className='w-full mx-auto gap-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
+        <div className='p-4'>
+            <h1 className='text-3xl font-bold text-center pt-4 pb-8'>Latest User Review</h1>
+            <div className='w-full mx-auto gap-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
             {
                 review.map((review)=>(<div className="card bg-base-100 shadow-xl">
-                    <figure className="px-10 pt-10">
+                    <figure className="px-10">
                       <img
                         src={review.image}
                         alt="Shoes"
@@ -30,6 +32,8 @@ const LatestUser = () => {
                   </div>))
             }
         </div>
+        </div>
+        
     );
 };
 

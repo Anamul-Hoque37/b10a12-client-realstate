@@ -17,7 +17,7 @@ const AllProperties = () => {
             const res = await axiosSecure.get(`/properties?verifyStatus=${verifyStatus}&search=${search}`);
             return res.data;
         }
-    })
+    }) 
 
     const [sortOrder, setSortOrder] = useState("default"); // "asc", "desc", "default"
     const sortedProperty = [...properties].sort((a, b) => {

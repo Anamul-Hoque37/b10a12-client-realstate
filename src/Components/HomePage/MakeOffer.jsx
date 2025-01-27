@@ -7,7 +7,7 @@ import Swal from 'sweetalert2';
 
 const MakeOffer = () => {
     const currentUser = User();
-    const { name, title, image, location, _id } = useLoaderData();
+    const { name, email, title, image, location, _id } = useLoaderData();
     const { register, handleSubmit } = useForm();
     const axiosSecure = useAxiosSecure();
     const navigate = useNavigate();
@@ -18,6 +18,7 @@ const MakeOffer = () => {
             title: data.title,
             location: data.location,
             name: data.name,
+            email: data.email,
             image: image,
             buyerName: data.buyerName,
             buyerEmail: data.buyerEmail,
@@ -90,6 +91,17 @@ const MakeOffer = () => {
                                         {...register('name', { required: true })}
                                         required
                                         className="input input-bordered w-full" defaultValue={name} readOnly />
+                                </div>
+                                <div className="form-control">
+                                    <label className="label">
+                                        <span className="label-text">Agent Email</span>
+                                    </label>
+                                    <input
+                                        type="text"
+                                        placeholder="Agent Email"
+                                        {...register('email', { required: true })}
+                                        required
+                                        className="input input-bordered w-full" defaultValue={email} readOnly />
                                 </div>
                                 <div className="form-control">
                                     <label className="label">

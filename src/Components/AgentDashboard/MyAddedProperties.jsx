@@ -8,13 +8,15 @@ import { Link } from 'react-router-dom';
 const MyAddedProperties = () => {
     const currentUser = User()
     const axiosSecure = useAxiosSecure();
-    const { data: properties = [], refetch } = useQuery({
+    const { data: property = [], refetch } = useQuery({
         queryKey: ['property'],
         queryFn: async () => {
             const res = await axiosSecure.get('/property');
             return res.data;
         }
     })
+
+    const properties = property.filter((user) => user.email === currentUser.email);
     const handleDelete = id => {
         Swal.fire({
             title: "Are you sure?",
@@ -53,7 +55,7 @@ const MyAddedProperties = () => {
                                     src={property.image}
                                     alt="Shoes" />
                             </figure>
-                            <div className="card-body bg-white h-1/2">
+                            <div className="card-body bg-white">
                                 <h2 className="card-title">
                                     Verification!
                                     <div className="badge badge-secondary bg-purple-500 p-3">

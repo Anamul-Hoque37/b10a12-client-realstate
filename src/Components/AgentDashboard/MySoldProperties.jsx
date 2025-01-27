@@ -1,12 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
+import User from '../../Shared/User';
 
 const MySoldProperties = () => {
+    const currentUser = User();
     const axiosSecure = useAxiosSecure();
     // const [totalPrice, setTotalPrice] = useState(0);
     const soldStatus = 'sold'
-    const { data: sold = [] } = useQuery({
+    const { data: soldItem = [] } = useQuery({
         queryKey: ['soldStatus'],
         queryFn: async () => {
             const res = await axiosSecure.get(`/bought/agent/${soldStatus}`);
@@ -14,6 +16,7 @@ const MySoldProperties = () => {
         }
     });
 
+    const sold = soldItem.filter((user) => user.email === currentUser.email);
     const total = sold.reduce((acc, property) => acc + property.offerPrice, 0);
     console.log(total)
 
@@ -24,7 +27,7 @@ const MySoldProperties = () => {
                 <p className="text-2xl font-bold mb-4">Total Amount: $ {total}</p>
             </div>
             <div className="overflow-x-auto">
-                <table className="min-w-full border-collapse border border-gray-200 shadow-md">
+                <table className="min-w-full border-collapse border-2 border-slate-700 shadow-md">
                     <thead className='border-slate-700 border-2'>
                         <tr className="bg-green-500">
                             <th className="border w-1/4 border-gray-200 px-4 py-2 text-left font-medium text-gray-700">Title</th>

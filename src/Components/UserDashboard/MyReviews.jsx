@@ -54,7 +54,7 @@ const MyReviews = () => {
                                     src={property.image}
                                     alt="Shoes" />
                             </figure>
-                            <div className="card-body bg-white h-1/2">
+                            <div className="card-body bg-white">
                                 <h2 className="card-title">
                                     Verification!
                                     <div className="badge badge-secondary bg-purple-500 p-3">
