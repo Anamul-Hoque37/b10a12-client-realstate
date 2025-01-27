@@ -27,11 +27,11 @@ const PropertyBought = () => {
                                     src={property.image}
                                     alt="Shoes" />
                             </figure>
-                            <div className="card-body bg-white h-1/2">
+                            <div className="card-body w-full bg-white h-1/2">
                                 <div className='flex justify-between'>
                                     <h2 className="card-title">
                                         Verification!
-                                        <div className="badge badge-secondary bg-purple-500 p-3">
+                                        <div className="badge badge-secondary bg-purple-500 p-1">
                                             {property?.Status === 'accept' ? "Accepted" : "pending"}
                                         </div>
                                     </h2>

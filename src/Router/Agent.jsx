@@ -13,7 +13,7 @@ const Agent = () => {
                 <div className='md:py-8 items-center text-center justify-center'>
                     <ul className="menu menu-horizontal md:hidden bg-fuchsia-700 text-xl text-white">
                         <li><NavLink to="/" ><FaHome></FaHome> Home</NavLink></li>
-                        <li><NavLink to='/agent'><RiAdminLine /> Agent Profile</NavLink></li>
+                        <li><NavLink to='/agent/profile'><RiAdminLine /> Agent Profile</NavLink></li>
                         <li><NavLink to='/agent/add-property'><MdOutlineManageHistory /> Add Property</NavLink></li>
                         <li><NavLink to='/agent/added-property'><MdOutlinePreview /> My Added Properties</NavLink></li>
                         <li><NavLink to='/agent/sold-property'><FaUsers /> My Sold Properties</NavLink></li>
@@ -21,7 +21,7 @@ const Agent = () => {
                     </ul>
                     <ul className="menu menu-vertical w-full mx-auto hidden justify-center text-center items-center md:block bg-fuchsia-700 text-xl text-white">
                         <li><NavLink to="/" ><FaHome></FaHome> Home</NavLink></li>
-                        <li><NavLink to='/agent'><RiAdminLine /> Agent Profile</NavLink></li>
+                        <li><NavLink to='/agent/profile'><RiAdminLine /> Agent Profile</NavLink></li>
                         <li><NavLink to='/agent/add-property'><MdOutlineManageHistory /> Add Property</NavLink></li>
                         <li><NavLink to='/agent/added-property'><MdOutlinePreview /> My Added Properties</NavLink></li>
                         <li><NavLink to='/agent/sold-property'><FaUsers /> My Sold Properties</NavLink></li>

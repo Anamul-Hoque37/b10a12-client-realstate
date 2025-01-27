@@ -25,13 +25,10 @@ const UserNavbar = () => {
 
     const Links = <>
         <li><NavLink to="/" >Home</NavLink></li>
-        <li><NavLink to='/user'>My Profile</NavLink></li>
+        <li><NavLink to='/user/profile'>My Profile</NavLink></li>
         <li><NavLink to='/user/my-reviews'>My Reviews</NavLink></li>
         <li><NavLink to='/user/property'>Property Bought</NavLink></li>
         <li><NavLink to='/user/wishlist'>WishList</NavLink></li>
-        {/* {
-            user && <> <li><NavLink to='/add'>Add Tutorial</NavLink></li> </>
-        } */}
     </>
 
     return (

@@ -14,7 +14,7 @@ const Admin = () => {
                 <div className='py-8'>
                     <ul className="menu menu-horizontal md:hidden bg-fuchsia-700 text-xl text-white">
                         <li><NavLink to="/" ><FaHome></FaHome> Home</NavLink></li>
-                        <li><NavLink to='/admin'><RiAdminLine /> Admin Profile</NavLink></li>
+                        <li><NavLink to='/admin/profile'><RiAdminLine /> Admin Profile</NavLink></li>
                         <li><NavLink to='/admin/manage'><MdOutlineManageHistory /> Manage Properties</NavLink></li>
                         <li><NavLink to='/admin/manage-review'><MdOutlinePreview /> Manage Reviews</NavLink></li>
                         <li><NavLink to='/admin/manage-user'><FaUsers /> Manage Users</NavLink></li>
@@ -22,7 +22,7 @@ const Admin = () => {
                     </ul>
                     <ul className="menu menu-vertical hidden md:block bg-fuchsia-700 text-xl text-white">
                         <li><NavLink to="/" ><FaHome></FaHome> Home</NavLink></li>
-                        <li><NavLink to='/admin'><RiAdminLine /> Admin Profile</NavLink></li>
+                        <li><NavLink to='/admin/profile'><RiAdminLine /> Admin Profile</NavLink></li>
                         <li><NavLink to='/admin/manage'><MdOutlineManageHistory /> Manage Properties</NavLink></li>
                         <li><NavLink to='/admin/manage-review'><MdOutlinePreview /> Manage Reviews</NavLink></li>
                         <li><NavLink to='/admin/manage-user'><FaUsers /> Manage Users</NavLink></li>

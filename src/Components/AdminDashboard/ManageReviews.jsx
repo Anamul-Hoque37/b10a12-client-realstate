@@ -52,6 +52,7 @@ const ManageReviews = () => {
                             <div className="card-body items-center text-center">
                                 <h2 className="card-title">{property.reviewName}</h2>
                                 <p>{property.reviewEmail}</p>
+                                <p>{property.description}</p>
                                 <div className="card-actions">
                                     <button onClick={() => handleDelete(property._id)} className="btn btn-primary bg-fuchsia-700 hover:bg-fuchsia-900">Deleted</button>
                                 </div>

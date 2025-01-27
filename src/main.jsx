@@ -83,7 +83,7 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage></ErrorPage>,
         children: [
           {
-            path: '/admin',
+            path: '/admin/profile',
             element: <AdminProfile></AdminProfile>,
           },
           {
@@ -110,7 +110,7 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage></ErrorPage>,
         children: [
           {
-            path: '/user',
+            path: '/user/profile',
             element: <MyProfile></MyProfile>,
           },
           {
@@ -137,7 +137,7 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage></ErrorPage>,
         children: [
           {
-            path: '/agent',
+            path: '/agent/profile',
             element: <AgentProfile></AgentProfile>,
           },
           {

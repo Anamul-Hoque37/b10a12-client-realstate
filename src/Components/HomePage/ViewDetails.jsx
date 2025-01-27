@@ -3,6 +3,7 @@ import { useLoaderData } from 'react-router-dom';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
 import User from '../../Shared/User';
+import { useQuery } from '@tanstack/react-query';
 
 const ViewDetails = () => {
     const currentUser = User()
@@ -93,9 +94,21 @@ const ViewDetails = () => {
             });
         }
     };
+
+    const id = _id;
+    const { data: reviews = [] } = useQuery({
+        queryKey: ['id'],
+        queryFn: async () => {
+            const res = await axiosSecure.get(`/review/users/${id}`);
+            return res.data;
+        }
+    });
+    console.log(reviews)
+
+
     return (
         <div>
-            <div className="hero bg-base-200 min-h-screen flex flex-col p-8">
+            <div className="hero bg-base-200 min-h-screen items-center justify-center gap-6 flex flex-col p-8">
                 <p className='text-2xl text-center font-medium'>Describe bellow details of {title}</p>
                 <div className="hero-content flex-col lg:flex-row">
                     <img
@@ -108,19 +121,37 @@ const ViewDetails = () => {
                         </p>
                         <h1 className="text-3xl font-bold">{name}</h1>
                         <div className='flex gap-6'>
-                            <button onClick={handleAddWishlist} className="btn btn-primary">Add to Wishlist
+                            <button onClick={handleAddWishlist} className="mt-4 px-4 py-2 bg-fuchsia-600 hover:bg-fuchsia-800 text-white rounded">Add to Wishlist
                             </button>
-                            {/* <button onClick={handleAddReview} className="btn btn-primary">Add A Review
-                            </button> */}
+                            {/* Add a Review Button */}
+                            <button className="mt-4 px-4 py-2 bg-fuchsia-600 hover:bg-fuchsia-800 text-white rounded" onClick={() => setModalOpen(true)}>
+                                Add a Review
+                            </button>
                         </div>
                     </div>
                 </div>
+                {/* Review Section */}
+                <div className='w-full'>
+                    {reviews && <div className="overflow-x-auto">
+                        <table className="min-w-full border-collapse border border-gray-200  shadow-md">
+                            <thead className='border-slate-700 border'>
+                                <tr className="bg-green-500">
+                                    <th className="border border-gray-200 px-4 py-2 text-left font-medium text-gray-700">Name</th>
+                                    <th className="border border-gray-200 px-4 py-2 text-left font-medium text-gray-700">Description</th>
+                                </tr>
+                            </thead>
+                            <tbody className='border-slate-700 border'>
+                                {reviews.map((data) => (
+                                    <tr key={data._id}>
+                                        <td className="border border-gray-200 px-4">{data.reviewName}</td>
+                                        <td className="border border-gray-200 px-4">{data.description}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>}
+                </div>
             </div>
-            {/* Add a Review Button */}
-            <button className="mt-4 px-4 py-2 bg-blue-500 text-white rounded" onClick={() => setModalOpen(true)}>
-                Add a Review
-            </button>
-
             {/* Add Review Modal */}
             {isModalOpen && (
                 <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">

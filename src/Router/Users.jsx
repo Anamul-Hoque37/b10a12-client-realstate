@@ -20,7 +20,7 @@ const Users = () => {
                     </ul>
                     <ul className="menu menu-vertical hidden md:block bg-fuchsia-700 text-xl text-white">
                     <li><NavLink to="/" ><FaHome></FaHome> Home</NavLink></li>
-                        <li><NavLink to='/user'><RiAdminLine /> User Profile</NavLink></li>
+                        <li><NavLink to='/user/profile'><RiAdminLine /> User Profile</NavLink></li>
                         <li><NavLink to='/user/my-reviews'><MdOutlineManageHistory /> User Reviews</NavLink></li>
                         <li><NavLink to='/user/property'><FaShoppingBag /> Property Bought</NavLink></li>
                         <li><NavLink to='/user/wishlist'><VscPreview /> WishList</NavLink></li>
