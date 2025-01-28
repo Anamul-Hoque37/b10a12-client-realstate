@@ -56,7 +56,7 @@ const AddProperty = () => {
     return (
         <div>
             <div className="hero p-8 bg-base-200 min-h-screen">
-                <div className="hero-content bg-white rounded-md w-[400px] sm:w-[500px] md:w-[600px] lg:w-[700px] flex-col">
+                <div className="hero-content bg-white rounded-md w-full px-4 md:px-8 lg:px-16 flex-col">
                     <div className="card bg-white w-full shrink-0 shadow-2xl">
                         <form onSubmit={handleSubmit(onSubmit)} className="card-body">
                             <div className='grid grid-cols-1'>

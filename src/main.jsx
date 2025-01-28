@@ -61,12 +61,12 @@ const router = createBrowserRouter([
       {
         path: 'view-details/:id',
         element:<PrivateRoute><ViewDetails></ViewDetails></PrivateRoute>,
-        loader: ({params}) => fetch(`http://localhost:5000/view-details/property/${params.id}`)
+        loader: ({params}) => fetch(`https://b10a12-server-side-anamul-hoque37.vercel.app/view-details/property/${params.id}`)
       },
       {
         path: 'make-offer/:id',
         element: <PrivateRoute><MakeOffer></MakeOffer></PrivateRoute>,
-        loader: ({params}) => fetch(`http://localhost:5000/make-offer/wishlist/${params.id}`)
+        loader: ({params}) => fetch(`https://b10a12-server-side-anamul-hoque37.vercel.app/make-offer/wishlist/${params.id}`)
       },
       {
         path: 'dashboard',
@@ -174,7 +174,7 @@ const router = createBrowserRouter([
           {
             path: '/agent/update/:id',
             element: <UpdateProperty></UpdateProperty>,
-            loader: ({params}) => fetch(`http://localhost:5000/update/property/${params.id}`)
+            loader: ({params}) => fetch(`https://b10a12-server-side-anamul-hoque37.vercel.app/update/property/${params.id}`)
           },
         ]
       },

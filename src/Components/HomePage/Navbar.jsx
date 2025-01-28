@@ -61,7 +61,7 @@ const Navbar = () => {
                     </div>
                     <img className='w-14 h-14' src={img} alt="" />
                     <Zoom>
-                        <a className="btn btn-ghost text-2xl">Dreamnest</a>
+                        <a className="btn btn-ghost hidden md:flex text-2xl">Dreamnest</a>
                     </Zoom>
                 </div>
                 <div className="navbar-center hidden lg:flex">

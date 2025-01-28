@@ -4,7 +4,7 @@ import User from '../../Shared/User';
 const MyProfile = () => {
     const currentUser = User()
     return (
-        <div className='p-8 flex items-center justify-center'>
+        <div className='p-8 flex min-h-screen items-center justify-center'>
             <div className="card bg-white w-96 shadow-xl">
                 <figure className="px-10 pt-10">
                     <img
