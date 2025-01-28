@@ -9,7 +9,7 @@ import { FaHome } from 'react-icons/fa';
 const Agent = () => {
     return (
         <div className='flex flex-col md:flex-row'>
-            <div className='w-full mx-auto md:w-64 bg-gradient-to-l from-slate-700 via-fuchsia-700 to-slate-700'>
+            <div className='w-full mx-auto md:w-64 bg-slate-700'>
                 <div className='md:py-8 items-center text-center justify-center'>
                     <ul className="menu menu-horizontal md:hidden bg-fuchsia-700 text-xl text-white">
                         <li><NavLink to="/" ><FaHome></FaHome> Home</NavLink></li>
@@ -19,7 +19,7 @@ const Agent = () => {
                         <li><NavLink to='/agent/sold-property'><FaUsers /> My Sold Properties</NavLink></li>
                         <li><NavLink to='/agent/offer'><IoBagAddSharp /> Offered Properties</NavLink></li>
                     </ul>
-                    <ul className="menu menu-vertical w-full mx-auto hidden justify-center text-center items-center md:block bg-fuchsia-700 text-xl text-white">
+                    <ul className="menu menu-vertical w-full mx-auto hidden py-16 rounded-2xl justify-center text-center items-center md:block bg-fuchsia-700 text-xl text-white">
                         <li><NavLink to="/" ><FaHome></FaHome> Home</NavLink></li>
                         <li><NavLink to='/agent/profile'><RiAdminLine /> Agent Profile</NavLink></li>
                         <li><NavLink to='/agent/add-property'><MdOutlineManageHistory /> Add Property</NavLink></li>

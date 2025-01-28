@@ -5,7 +5,7 @@ const Footer = () => {
         <footer className="bg-slate-800 text-white">
             <div className="max-w-7xl mx-auto px-6 py-10 sm:px-6 lg:px-8">
                 {/* Top Section */}
-                <div className="hidden pb-3 sm:block md:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div className="hidden pb-3 sm:block md:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                     {/* About Section */}
                     <div>
                         <h2 className="text-lg font-semibold mb-4">About Us</h2>
@@ -15,7 +15,7 @@ const Footer = () => {
                     </div>
 
                     {/* Quick Links */}
-                    <div>
+                    {/* <div>
                         <h2 className="text-lg font-semibold mb-4">Quick Links</h2>
                         <ul className="text-gray-400 text-sm space-y-2">
                             <li>
@@ -39,7 +39,7 @@ const Footer = () => {
                                 </a>
                             </li>
                         </ul>
-                    </div>
+                    </div> */}
 
                     {/* Contact Section */}
                     <div>

@@ -40,6 +40,9 @@ import ViewDetails from './Components/HomePage/ViewDetails';
 import MakeOffer from './Components/HomePage/MakeOffer';
 import Payment from './Components/UserDashboard/Payment';
 import AdvertiseProperty from './Components/AdminDashboard/AdvertiseProperty';
+import UsersGreeting from './Components/UserDashboard/UsersGreeting';
+import AgentGreeting from './Components/AgentDashboard/AgentGreeting';
+import AdminGreeting from './Components/AdminDashboard/AdminGreeting';
 
 const router = createBrowserRouter([
   {
@@ -83,6 +86,10 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage></ErrorPage>,
         children: [
           {
+            path: '/admin',
+            element: <AdminGreeting></AdminGreeting>
+          },
+          {
             path: '/admin/profile',
             element: <AdminProfile></AdminProfile>,
           },
@@ -114,6 +121,10 @@ const router = createBrowserRouter([
             element: <MyProfile></MyProfile>,
           },
           {
+            path: '/user',
+            element: <UsersGreeting></UsersGreeting>
+          },
+          {
             path:'/user/payment/:id',
             element: <Payment></Payment>,
           },
@@ -136,6 +147,10 @@ const router = createBrowserRouter([
         element: <Agent></Agent>,
         errorElement: <ErrorPage></ErrorPage>,
         children: [
+          {
+            path: '/agent',
+            element: <AgentGreeting></AgentGreeting>
+          },
           {
             path: '/agent/profile',
             element: <AgentProfile></AgentProfile>,

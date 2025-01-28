@@ -75,7 +75,8 @@ const OfferedProperties = () => {
                                 <td className="border border-gray-200 px-4">{data.buyerEmail}</td>
                                 <td className="border border-gray-200 px-4">{data.offerPrice}</td>
                                 <td className="border border-gray-200 ">
-                                    {data.Status === 'accept' ? <button className='btn btn-primary w-full bg-green-600 text-center h-full text-white'>Accepted</button> : <button onClick={() => handleAccept(data)} className="btn btn-primary w-full bg-fuchsia-700 hover:bg-fuchsia-900  text-white">Make Accept</button>}
+                                    {data.Status === 'accept' ? <button className='btn btn-primary w-full bg-green-600 text-center h-full text-white'>Accepted</button> : <button onClick={() => handleAccept(data)} className="btn btn-primary w-full bg-fuchsia-700 hover:bg-fuchsia-900 text-white">Make Accept</button>
+                                }
                                 </td>
                                 <td className="border border-gray-200 ">
                                     {data.Status === 'reject' ? <button className='btn btn-primary w-full bg-lime-500 text-center h-full text-white'>Rejected</button> : <button onClick={() => handleReject(data)} className="btn btn-primary w-full bg-fuchsia-700 hover:bg-fuchsia-900  text-white">Make Reject</button>}

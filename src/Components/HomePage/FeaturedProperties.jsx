@@ -26,7 +26,7 @@ const FeaturedProperties = () => {
   ];
 
   return (
-    <section className="bg-gray-50 py-16 px-4 sm:px-8 lg:px-16">
+    <section className="bg-gray-50 py-8 px-4 sm:px-8 lg:px-16">
       <div className="max-w-7xl mx-auto">
         <h2 className="text-3xl font-bold text-gray-800 text-center">
           Featured Properties

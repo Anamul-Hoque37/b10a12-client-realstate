@@ -24,7 +24,7 @@ const ViewDetails = () => {
             priceMax: priceMax,
             image: image,
             verifyStatus: verifyStatus,
-            UserEmail: currentUser.email,
+            userEmail: currentUser.email,
             id: _id
         }
         // 
