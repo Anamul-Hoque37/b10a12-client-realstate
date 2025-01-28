@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import User from '../../Shared/User';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
@@ -7,12 +7,26 @@ import Swal from 'sweetalert2';
 
 const MakeOffer = () => {
     const currentUser = User();
-    const { name, email, title, image, location, _id } = useLoaderData();
+    const { name, email, title, image, location, _id, priceMin, priceMax } = useLoaderData();
     const { register, handleSubmit } = useForm();
     const axiosSecure = useAxiosSecure();
+    const [error, setError] = useState("");
     const navigate = useNavigate();
     const onSubmit = async (data) => {
-        console.log(data)
+        // Validate offer amount within range
+        if (
+            data.offerPrice < priceMin ||
+            data.offerPrice > priceMax ||
+            !data.offerPrice
+        ) {
+            setError(
+                `Offer must be between $${priceMin} and $${priceMax}.`
+            );
+            return;
+        }
+
+        // Clear error and proceed
+        setError("");
         // now send the menu item data to the server with the image url
         const makeOffer = {
             title: data.title,
@@ -39,7 +53,7 @@ const MakeOffer = () => {
                 timer: 1500
             });
             navigate('/user/wishlist')
-        }else{
+        } else {
             Swal.fire({
                 position: "top-end",
                 icon: "error",
@@ -67,7 +81,7 @@ const MakeOffer = () => {
                                         placeholder="Property Title"
                                         {...register('title', { required: true })}
                                         required
-                                        className="input input-bordered w-full" readOnly/>
+                                        className="input input-bordered w-full" readOnly />
                                 </div>
                                 <div className="form-control">
                                     <label className="label">
@@ -79,7 +93,7 @@ const MakeOffer = () => {
                                         placeholder="Property Location"
                                         {...register('location', { required: true })}
                                         required
-                                        className="input input-bordered w-full" readOnly/>
+                                        className="input input-bordered w-full" readOnly />
                                 </div>
                                 <div className="form-control">
                                     <label className="label">
@@ -135,6 +149,7 @@ const MakeOffer = () => {
                                         {...register('offerPrice', { required: true })}
                                         className="input input-bordered w-full" />
                                 </div>
+                                {error && <p className="text-red-500 mb-4">{error}</p>}
                                 <div className="form-control">
                                     <label className="label">
                                         <span className="label-text">Buying Date</span>
