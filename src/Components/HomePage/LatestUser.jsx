@@ -23,11 +23,11 @@ const LatestUser = () => {
                         alt="Shoes"
                         className="rounded-xl h-full w-full" />
                     </figure>
-                    <div className="card-body items-center text-center">
+                    <div className="card-body bg-slate-100 items-center text-center">
                       <h2 className="card-title">{review.title}</h2>
-                      <h2>{review.name}</h2>
-                      <p>{review.reviewName}</p>
-                      <p>{review.description}</p>
+                      <h2 className='text-black'>{review.name}</h2>
+                      <p className='text-black'>{review.reviewName}</p>
+                      <p className='text-black'>{review.description}</p>
                     </div>
                   </div>))
             }
