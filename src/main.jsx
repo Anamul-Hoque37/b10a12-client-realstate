@@ -43,6 +43,9 @@ import AdvertiseProperty from './Components/AdminDashboard/AdvertiseProperty';
 import UsersGreeting from './Components/UserDashboard/UsersGreeting';
 import AgentGreeting from './Components/AgentDashboard/AgentGreeting';
 import AdminGreeting from './Components/AdminDashboard/AdminGreeting';
+import Certifications from './Components/HomePage/Certifications';
+import FAQ from './Components/HomePage/FAQ';
+import Fraud from './Components/HomePage/Fraud';
 
 const router = createBrowserRouter([
   {
@@ -57,6 +60,18 @@ const router = createBrowserRouter([
       {
         path: 'all-properties',
         element: <AllProperties></AllProperties>,
+      },
+      {
+        path: 'certifications',
+        element: <Certifications></Certifications>
+      },
+      {
+        path: 'faq',
+        element: <FAQ></FAQ>
+      },
+      {
+        path: 'fraud',
+        element: <Fraud></Fraud>
       },
       {
         path: 'view-details/:id',

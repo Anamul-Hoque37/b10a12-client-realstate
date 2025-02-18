@@ -70,12 +70,12 @@ const Registration = () => {
                     axiosPublic.post('/users', userInfo)
                     .then(res =>{
                         if(res.data.insertedId){
-                            navigate("/")
                             Swal.fire({
                                 title: 'success',
                                 text: 'Successfully login',
                                 icon: 'success',
                             }); 
+                            navigate("/")
                         }
                     })
                 }).catch(err =>{

@@ -28,7 +28,13 @@ const Navbar = () => {
         <li><NavLink to="/" >Home</NavLink></li>
         <li><NavLink to='/all-properties'>All Properties</NavLink></li>
         {
-          user?.email ?   currentUser?.role === 'admin' ? <li><NavLink to='/admin'>Admin Dashboard</NavLink></li> : currentUser?.role === 'agent' ? <li><NavLink to='/agent'>Agent Dashboard</NavLink></li> : <li><NavLink to='/user'>User Dashboard</NavLink></li> : <li><NavLink to='/login'>Dashboard</NavLink></li>
+            user?.email ? <li><NavLink to='certifications'>Certifications</NavLink></li> : ''
+        }
+        {
+            user?.email ? <li><NavLink to='faq'>FAQs</NavLink></li> : ''
+        }
+        {
+          user?.email ?   currentUser?.role === 'admin' ? <li><NavLink to='/admin'>Admin Dashboard</NavLink></li> : currentUser?.role === 'agent' ? <li><NavLink to='/agent'>Agent Dashboard</NavLink></li> : currentUser?.role === 'fraud' ? <li><NavLink to='/fraud'>Fraud</NavLink></li> : <li><NavLink to='/user'>User Dashboard</NavLink></li> : <li><NavLink to='/login'>Dashboard</NavLink></li>
         }
     </>
 
