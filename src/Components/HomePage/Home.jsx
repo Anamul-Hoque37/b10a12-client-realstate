@@ -4,6 +4,7 @@ import Advertisement from './Advertisement';
 import LatestUser from './LatestUser';
 import FeaturedProperties from './FeaturedProperties';
 import SiteOffice from './SiteOffice';
+import Abouts from './Abouts';
 
 const Home = () => {
     return (
@@ -12,6 +13,7 @@ const Home = () => {
             <Advertisement></Advertisement>
             <LatestUser></LatestUser>
             <FeaturedProperties></FeaturedProperties>
+            <Abouts></Abouts>
             <SiteOffice></SiteOffice>
         </div>
     );

@@ -8,7 +8,7 @@ import { useQuery } from "@tanstack/react-query";
 
 
 const CheckOutForm = ({ id }) => {
-
+    const timeStamp = new Date();
     const [error, setError] = useState('');
     const [clientSecret, setClientSecret] = useState('')
     const [transactionId, setTransactionId] = useState('');
@@ -93,6 +93,7 @@ const CheckOutForm = ({ id }) => {
                 // now save the payment in the database
                 const payment = {
                     transactionId: paymentIntent.id,
+                    createdAt: timeStamp
                 }
 
                 const paymentData = await axiosSecure.patch(`/bought/${id}`, payment);
