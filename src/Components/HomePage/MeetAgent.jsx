@@ -28,12 +28,12 @@ const MeetAgent = () => {
         },
     ];
     return (
-        <section className="py-10 bg-gray-100">
+        <section className="py-10">
             <div className="container mx-auto px-4">
                 <h2 className="text-3xl font-bold text-center mb-6">Meet Our Agents</h2>
                 <div className="grid md:grid-cols-3 gap-6">
                     {agents.map((agent) => (
-                        <div key={agent.id} className="bg-white rounded-lg shadow-lg p-4 text-center">
+                        <div key={agent.id} className="bg-slate-50 rounded-lg shadow-lg p-4 text-center">
                             <img
                                 src={agent.image}
                                 alt={agent.name}

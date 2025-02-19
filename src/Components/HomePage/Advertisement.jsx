@@ -14,7 +14,7 @@ const Advertisement = () => {
         }
     })
     return (
-        <div className='p-4'>
+        <div className='container px-4 mx-auto'>
             <h1 className='text-3xl font-bold text-center pt-4 pb-8'>See Ours Projects</h1>
             <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>
                 {

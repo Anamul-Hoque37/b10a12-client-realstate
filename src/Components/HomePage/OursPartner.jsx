@@ -19,7 +19,7 @@ const OursPartner = () => {
         },
       ];
     return (
-        <section className="py-10 bg-white">
+        <section className="py-10">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-6">Our Partners & Affiliations</h2>
           <div className="grid md:grid-cols-3 gap-6 text-center">

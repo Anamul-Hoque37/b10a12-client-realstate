@@ -46,7 +46,7 @@ const AllProperties = () => {
             <div className='flex flex-col md:flex-row justify-center items-center md:justify-between'>
                 <h1 className="text-2xl font-bold mb-4">All Properties: {properties.length}</h1>
                 {/* Dropdown for Sorting */}
-                <div className="mb-4 flex justify-center items-center gap-2">
+                <div className="mb-4 flex justify-center bg-white p-2 rounded-md items-center gap-2">
                     <label htmlFor="sort" className="block mb-2 text-xl font-bold text-gray-700">
                         Sort by Price
                     </label>

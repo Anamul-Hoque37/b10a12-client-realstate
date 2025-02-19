@@ -26,12 +26,12 @@ const FeaturedProperties = () => {
   ];
 
   return (
-    <section className="bg-gray-50 py-8 px-4 sm:px-8 lg:px-16">
+    <section className="py-10 px-4 sm:px-8 lg:px-16">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-3xl font-bold text-gray-800 text-center">
+        <h2 className="text-3xl font-bold text-center">
           Featured Properties
         </h2>
-        <p className="text-gray-600 text-center mt-4">
+        <p className="text-center mt-4">
           Discover your dream home from our handpicked selection of luxury properties.
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
