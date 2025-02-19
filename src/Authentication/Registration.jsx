@@ -94,26 +94,6 @@ const Registration = () => {
             });
     };
 
-    // const handleGoogleSignIn = () => {
-    //     signInWithPopup(auth, provider)
-    //         .then((result) => {
-    //             navigate("/")
-    //             Swal.fire({
-    //                 title: 'success',
-    //                 text: 'Successfully login',
-    //                 icon: 'success',
-    //             });
-    //         })
-    //         .catch(error => {
-    //             Swal.fire({
-    //                 title: 'Error',
-    //                 text: 'Cannot Login', error,
-    //                 icon: 'error',
-    //                 footer: 'Please check your internet connection and try again.'
-    //             });
-    //         })
-    // }
-
     return (
         <div className='p-6'>
             <div className="card bg-white w-11/12 sm:w-10/12 md:w-3/4 lg:w-7/12 mx-auto shrink-0 shadow-2xl">
@@ -122,25 +102,25 @@ const Registration = () => {
                         <label className="label">
                             <span className="label-text">Name</span>
                         </label>
-                        <input name="name" type="text" placeholder="name" className="input input-bordered" required />
+                        <input name="name" type="text" placeholder="name" className="input input-bordered bg-slate-50 text-black" required />
                     </div>
                     <div className="form-control">
                         <label className="label">
                             <span className="label-text">Photo</span>
                         </label>
-                        <input name="photo" type="text" placeholder="Photo" className="input input-bordered" required />
+                        <input name="photo" type="text" placeholder="Photo" className="input input-bordered bg-slate-50 text-black" required />
                     </div>
                     <div className="form-control">
                         <label className="label">
                             <span className="label-text">Email</span>
                         </label>
-                        <input name="email" type="email" placeholder="email" className="input input-bordered" required />
+                        <input name="email" type="email" placeholder="email" className="input input-bordered bg-slate-50" required />
                     </div>
                     <div className="form-control relative">
                         <label className="label">
                             <span className="label-text">Password</span>
                         </label>
-                        <input name="password" type={showPassword ? 'text' : 'password'} placeholder="password" className="input input-bordered" required />
+                        <input name="password" type={showPassword ? 'text' : 'password'} placeholder="password" className="input input-bordered bg-slate-50" required />
                         <button onClick={() => setShowPassword(!showPassword)} className='btn btn-xs absolute right-4 top-12'>
                             {
                                 showPassword ? <FaEyeSlash className='text-2xl'/> : <FaEye className='text-2xl'/>

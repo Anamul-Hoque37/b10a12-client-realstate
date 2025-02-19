@@ -42,36 +42,17 @@ const Login = () => {
         })
     };
 
-    // const handleGoogleSignIn = () =>{
-    //     signInWithPopup(auth, provider)
-    //     .then((result) =>{
-    //         navigate(location?.state ? location.state : "/")
-    //         Swal.fire({
-    //             title: 'success',
-    //             text: 'Successfully login',
-    //             icon: 'success',
-    //         });
-    //     })
-    //     .catch(error =>{
-    //         Swal.fire({
-    //             title: 'Error',
-    //             text: 'Cannot Login', error,
-    //             icon: 'error',
-    //             footer: 'Please check your Google account.'
-    //         });
-    //     })
-    // }
 
     return (
         <div className='p-6'>
             <div className="card bg-white w-11/12 sm:w-10/12 md:w-3/4 lg:w-7/12 mx-auto shrink-0 shadow-2xl">
                 <form onSubmit={handleSubmit} className="card-body">
-                    <h1 className="text-2xl font-bold text-center">Login Your Account</h1>
+                    <h1 className="text-2xl text-black font-bold text-center">Login Your Account</h1>
                     <div className="form-control">
                         <label className="label">
                             <span className="label-text">Email</span>
                         </label>
-                        <input name="email" ref={emailRef} type="email" placeholder="email" className="input input-bordered" required />
+                        <input name="email" ref={emailRef} type="email" placeholder="email" className="input input-bordered bg-slate-50" required />
                     </div>
                     <div className="form-control relative">
                         <label className="label">

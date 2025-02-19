@@ -6,7 +6,7 @@ const AgentProfile = () => {
     console.log(currentUser)
     return (
         <div className='p-8 flex items-center justify-center'>
-            <div className="card bg-white w-96 shadow-xl">
+            <div className="card bg-white shadow-xl">
                 <figure className="px-10 pt-10">
                     <img
                         src={currentUser.image}

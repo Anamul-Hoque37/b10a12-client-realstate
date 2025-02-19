@@ -42,7 +42,7 @@ const ManageReviews = () => {
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
                 {
                     review.map((property) => (
-                        <div key={property._id} className="card bg-base-100 shadow-xl">
+                        <div key={property._id} className="card bg-slate-50 shadow-xl">
                             <figure className="px-10 pt-10">
                                 <img
                                     src={property.reviewImage}
@@ -50,9 +50,9 @@ const ManageReviews = () => {
                                     className="rounded-xl" />
                             </figure>
                             <div className="card-body items-center text-center">
-                                <h2 className="card-title">{property.reviewName}</h2>
-                                <p>{property.reviewEmail}</p>
-                                <p>{property.description}</p>
+                                <h2 className="card-title text-black">{property.reviewName}</h2>
+                                <p className='text-black'>{property.reviewEmail}</p>
+                                <p className='text-black'>{property.description}</p>
                                 <div className="card-actions">
                                     <button onClick={() => handleDelete(property._id)} className="btn btn-primary bg-fuchsia-700 hover:bg-fuchsia-900">Deleted</button>
                                 </div>

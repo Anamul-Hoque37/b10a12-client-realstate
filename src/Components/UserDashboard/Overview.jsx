@@ -12,7 +12,7 @@ const Overview = () => {
     const [chartType, setChartType] = useState("bar");
 
     return (
-      <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="p-6 flex flex-col gap-6">
         <div className="card bg-gradient-to-r from-purple-500 to-indigo-500 shadow-2xl col-span-1 md:col-span-2 text-white">
           <div className="card-body">
             <h2 className="card-title text-3xl font-bold">🏡 Real Estate Dashboard</h2>
