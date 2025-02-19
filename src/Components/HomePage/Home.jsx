@@ -4,7 +4,7 @@ import Advertisement from './Advertisement';
 import LatestUser from './LatestUser';
 import FeaturedProperties from './FeaturedProperties';
 import SiteOffice from './SiteOffice';
-import Abouts from './Abouts';
+import About from './About';
 import MeetAgent from './MeetAgent';
 import OursPartner from './OursPartner';
 
@@ -12,10 +12,10 @@ const Home = () => {
     return (
         <div>
             <Banner></Banner>
+            <About></About>
             <Advertisement></Advertisement>
             <LatestUser></LatestUser>
             <FeaturedProperties></FeaturedProperties>
-            <Abouts></Abouts>
             <OursPartner></OursPartner>
             <MeetAgent></MeetAgent>
             <SiteOffice></SiteOffice>

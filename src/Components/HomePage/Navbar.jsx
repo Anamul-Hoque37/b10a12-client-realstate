@@ -70,6 +70,8 @@ const Navbar = () => {
                         <a className="btn btn-ghost hidden md:flex text-2xl">Dreamnest</a>
                     </Zoom>
                 </div>
+                
+                <div className="flex gap-1">
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal">
                         {
@@ -77,7 +79,6 @@ const Navbar = () => {
                         }
                     </ul>
                 </div>
-                <div className="flex gap-1">
                     <div className="flex-none">
                         <label className="swap swap-rotate">
                             {/* This checkbox toggles the dark mode */}

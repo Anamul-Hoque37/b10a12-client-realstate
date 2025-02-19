@@ -46,6 +46,7 @@ import AdminGreeting from './Components/AdminDashboard/AdminGreeting';
 import Certifications from './Components/HomePage/Certifications';
 import FAQ from './Components/HomePage/FAQ';
 import Fraud from './Components/HomePage/Fraud';
+import Overview from './Components/UserDashboard/Overview';
 
 const router = createBrowserRouter([
   {
@@ -154,6 +155,10 @@ const router = createBrowserRouter([
           {
             path: '/user/wishlist',
             element: <Wishlist></Wishlist>,
+          },
+          {
+            path: '/user/overview',
+            element: <Overview></Overview>,
           },
         ]
       },
