@@ -99,7 +99,6 @@ const router = createBrowserRouter([
       {
         path: "/admin",
         element: <Admin></Admin>,
-        errorElement: <ErrorPage></ErrorPage>,
         children: [
           {
             path: '/admin',
@@ -130,7 +129,6 @@ const router = createBrowserRouter([
       {
         path: "/user",
         element: <PrivateRoute><Users></Users></PrivateRoute>,
-        errorElement: <ErrorPage></ErrorPage>,
         children: [
           {
             path: '/user/profile',
@@ -165,7 +163,6 @@ const router = createBrowserRouter([
       {
         path: "/agent",
         element: <Agent></Agent>,
-        errorElement: <ErrorPage></ErrorPage>,
         children: [
           {
             path: '/agent',

@@ -84,7 +84,7 @@ const UpdateProperty = () => {
                                 <div className="form-control">
                                     <label className="label">
                                         <span className="label-text">Agent Name</span>
-                                    </label>
+                                    </label> 
                                     <input
                                         type="text"
                                         placeholder="Property Location"
