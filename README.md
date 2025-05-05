@@ -4,7 +4,10 @@ Welcome to the **Dreamnest**, a comprehensive solution for managing properties, 
 
 ### 👤 Admin User
 * *User Name: ana@4430gmail.com*
-* *Password: A@11111*
+* *Password: Aa@111*
+### 👤 Agent User
+* *User Name: ana@4431gmail.com*
+* *Password: Aa@111*
 
 ## 🔗 Live URL
 *https://realstate-d63ed.web.app/*
